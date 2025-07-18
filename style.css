@@ -1,21 +1,70 @@
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:Tahoma, sans-serif;background:#0d1117;color:#fff;line-height:1.6;}
-a{color:#58a6ff;text-decoration:none;}
-header nav, footer{background:#161b22;padding:1rem;text-align:center;}
-header nav img.logo{height:50px;}
-header nav ul{list-style:none;display:flex;justify-content:center;gap:1rem;margin-top:0.5rem;}
-header nav ul li a{padding:0.5rem 1rem;background:#21262d;border-radius:6px;}
-.lang-toggle{position:absolute;top:1rem;right:1rem;padding:0.4rem 0.8rem;background:#238636;color:#fff;border:none;border-radius:4px;cursor:pointer;}
-main{padding:2rem;}
-.hero{text-align:center;}
-.hero img{max-width:300px;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,0.5);}
-.btns{margin-top:1.5rem;display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;}
-.btn, .dl-btn{background:#238636;color:#fff;padding:0.8rem 1.2rem;border-radius:6px;transition:0.2s;}
-.btn:hover, .dl-btn:hover{transform:scale(1.05);}
-.gallery, .videos{display:grid;gap:15px;justify-items:center;}
-.gallery{grid-template-columns:repeat(auto-fit,minmax(120px,1fr));}
-.videos{grid-template-columns:repeat(auto-fit,minmax(200px,1fr));}
-.gallery img{width:100%;border-radius:8px;transition:0.3s;}
-.gallery img:hover{transform:scale(1.05);}
-footer{margin-top:2rem;}
-footer a{color:#58a6ff;}
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Atelier Electronique Médenine</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <button id="lang-switch">Français</button>
+  </header>  <section class="top-bar">
+    <div class="clock" id="clock"></div>
+    <div class="visits" id="visits"></div>
+  </section>  <section class="news">
+    <marquee direction="right" scrollamount="5" id="news-marquee">
+      🔧 جديد الورشة: خدمة عن بُعد لجميع الولايات | عروض خاصة على التصليح هذا الأسبوع 🔧
+    </marquee>
+  </section>  <section class="cta-buttons">
+    <a href="https://wa.me/21698192103" target="_blank" class="cta-button">📞 واتساب</a>
+    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="cta-button">📍 خرائط Google</a>
+  </section>  <section class="qr-section">
+    <img src="assets/qr.png" alt="QR Code" class="qr-code">
+    <p>📱 امسح للوصول السريع</p>
+  </section>  <section class="gallery">
+    <h2>📷 صور من الورشة</h2>
+    <div class="media-grid">
+      <img src="media/1.webp" alt="صورة1">
+      <img src="media/2.webp" alt="صورة2">
+      <img src="media/3.webp" alt="صورة3">
+    </div>
+  </section>  <section class="videos">
+    <h2>🎥 فيديوهات التصليح</h2>
+    <div class="media-grid">
+      <video controls src="media/fix1.mp4"></video>
+      <video controls src="media/fix2.mp4"></video>
+    </div>
+  </section>  <section class="services">
+    <h2>🛠️ خدماتنا</h2>
+    <ul>
+      <li>تشخيص الأعطال بدقة</li>
+      <li>تصليح كروت إلكترونية</li>
+      <li>صيانة أجهزة منزلية</li>
+      <li>خدمة عن بُعد عبر البريد</li>
+    </ul>
+  </section>  <section class="radio">
+    <h2>📻 استمع للقرآن الكريم</h2>
+    <audio controls src="https://stream.radiojar.com/0tpy1kdtg0quv"></audio>
+  </section>  <section class="faq">
+    <h2>❓ الأسئلة الشائعة</h2>
+    <div class="faq-item">
+      <button class="faq-question">كيف نرسل الجهاز للورشة؟</button>
+      <div class="faq-answer">يمكنك إرساله عبر البريد السريع مع ذكر رقم الهاتف.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">هل توجد ضمانات؟</button>
+      <div class="faq-answer">نعم، كل تصليح مضمون ويشمل تقرير وصور.</div>
+    </div>
+  </section>  <section class="map">
+    <h2>📍 موقع الورشة</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+  </section>  <footer>
+    <p>مدنين – نخدمو في كامل أنحاء تونس</p>
+    <p>📆 من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
+  </footer>
+</body>
+</html>
