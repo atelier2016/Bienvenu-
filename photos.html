@@ -1,39 +1,29 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>🖼️ صور الورشة | AEM</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>معرض الصور</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { font-family: sans-serif; background: #0d1117; color: #fff; text-align: center; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; padding: 20px; }
+    .gallery img { width: 100%; border-radius: 10px; box-shadow: 0 0 10px #000; transition: 0.3s; }
+    .gallery img:hover { transform: scale(1.05); }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <h1 data-ar="🖼️ صور الورشة" data-fr="🖼️ Photos de l'atelier">🖼️ صور الورشة</h1>
-    <button class="lang-toggle" onclick="toggleLanguage()">FR</button>
-  </header>
-
-  <section class="gallery">
-    <div class="photo-card">
-      <img src="photos/photo1.jpg" alt="صورة">
-      <div class="actions">
-        <button onclick="react(this, 'like')">👍</button>
-        <button onclick="react(this, 'love')">❤️</button>
-        <button onclick="react(this, 'laugh')">😂</button>
-      </div>
-      <div class="comments">
-        <input type="text" placeholder="💬 أضف تعليقك" onkeydown="addComment(event, this)">
-        <ul class="comment-list"></ul>
-      </div>
-    </div>
-    <!-- أضف صور أخرى بنفس البلوك -->
-  </section>
-
-  <footer class="footer">
-    <p data-ar="مدنين – نخدمو كامل الجمهورية" data-fr="Médenine – Nous desservons toute la Tunisie">
-      مدنين – نخدمو كامل الجمهورية
-    </p>
-  </footer>
-
-  <script src="script.js"></script>
+  <h1>📸 معرض الصور</h1>
+  <div class="gallery">
+    <img src="photo1.jpg" alt="صورة 1">
+    <img src="photo2.jpg" alt="صورة 2">
+    <img src="photo3.jpg" alt="صورة 3">
+    <img src="photo5.jpg" alt="صورة 5">
+    <img src="photo6.jpg" alt="صورة 6">
+    <img src="photo7.jpg" alt="صورة 7">
+    <img src="photo8.jpg" alt="صورة 8">
+    <img src="photo9.jpg" alt="صورة 9">
+    <img src="photo10.jpg" alt="صورة 10">
+  </div>
 </body>
 </html>
