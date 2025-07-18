@@ -1,50 +1,55 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Atelier Électronique Médenine</title>
-  <link rel="icon" href="logo.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📥 تحميل | فيديوهات | صور</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
   <header>
+    <h1>📥 التحميلات</h1>
     <nav>
-      <img src="logo.png" alt="AEM Logo" class="logo">
-      <ul>
-        <li><a href="#home">الرئيسية</a></li>
-        <li><a href="photos.html">صور</a></li>
-        <li><a href="videos.html">فيديوهات</a></li>
-        <li><a href="download.html">تحميل</a></li>
-        <li><a href="#contact">اتصل بنا</a></li>
-      </ul>
-      <button class="lang-toggle">EN</button>
+      <a href="#downloads">البرامج</a>
+      <a href="#videos">🎬 فيديوهات</a>
+      <a href="#photos">🖼️ صور</a>
     </nav>
-  </header>
-
-  <main id="home">
-    <section class="hero">
-      <img src="workshop.jpg" alt="ورشة إلكترونيك مدنين">
-      <h1 data-i18n="hero_title">مرحبا بكم في ورشة إلكترونيك مدنين</h1>
-      <p data-i18n="hero_text">نقدم خدمات إصلاح وبيع قطع إلكترونية عالية الجودة ومناسبة لكل مشروع.</p>
-      <div class="btns">
-        <a href="photos.html" class="btn" data-i18n="btn_photos">📸 صور</a>
-        <a href="videos.html" class="btn" data-i18n="btn_videos">🎥 فيديوهات</a>
-        <a href="download.html" class="btn" data-i18n="btn_download">📥 تحميل</a>
+  </header>  <main>
+    <section id="downloads" class="section">
+      <h2>📥 تحميل البرامج</h2>
+      <div class="download-item">
+        <img src="img/ccleaner.png" alt="CCleaner">
+        <h3>CCleaner</h3>
+        <a href="downloads/ccsetup.exe" download class="btn">⬇️ تحميل</a>
       </div>
-    </section>
+      <!-- أضف المزيد من البرامج هنا -->
+    </section><section id="videos" class="section">
+  <h2>🎬 فيديوهات الورشة</h2>
+  <div class="media-gallery">
+    <div class="video-box">
+      <video controls poster="img/thumb1.jpg">
+        <source src="videos/video1.mp4" type="video/mp4">
+        متصفحك لا يدعم الفيديو
+      </video>
+      <p>شرح تصليح كارت ثلاجة</p>
+    </div>
+    <!-- أضف المزيد من الفيديوهات -->
+  </div>
+</section>
 
-    <section id="contact">
-      <h2 data-i18n="contact_title">اتصل بنا</h2>
-      <p>📍 مدنين – تونس</p>
-      <p>📞 <a href="https://wa.me/123456789" target="_blank">واتساب</a></p>
-      <p>✉️ <a href="mailto:contact@atelier.com">contact@atelier.com</a></p>
-    </section>
-  </main>
+<section id="photos" class="section">
+  <h2>🖼️ صور من الورشة</h2>
+  <div class="media-gallery">
+    <div class="photo-box">
+      <img src="photos/photo1.jpg" alt="ورشة">
+      <p>تصليح كارت أم</p>
+    </div>
+    <!-- أضف المزيد من الصور -->
+  </div>
+</section>
 
-  <footer>
-    <p>© 2025 Atelier Électronique Médenine</p>
+  </main>  <footer>
+    <p>&copy; 2025 Atelier Electronique Médenine</p>
   </footer>
 </body>
 </html>
