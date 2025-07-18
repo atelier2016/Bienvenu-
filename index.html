@@ -1,84 +1,50 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Atelier Électronique Médenine</title>
-  <link rel="icon" href="qr-code.png" />
-  <script src="locale.js" defer></script>
+  <link rel="icon" href="logo.png">
+  <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
-  <style>
-    /* سي إس إس مختصر للعرض */
-    :root {
-      --main-color: #005bea;
-      --orange: #ff6a00;
-      --bg-dark: #0a0f24;
-      --text-light: #f0f4ff;
-    }
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:Tajawal,sans-serif;background:var(--bg-dark);color:var(--text-light);}
-    header, footer{padding:1rem;max-width:1000px;margin:auto;}
-    header{display:flex;justify-content:space-between;align-items:center;}
-    nav a{margin:0 0.5rem;color:var(--text-light);text-decoration:none;}
-    .lang-btn{background:var(--orange);border:none;color:#fff;padding:0.3rem 0.6rem;cursor:pointer;border-radius:4px;}
-    main{padding:2rem 1rem;text-align:center;}
-    .hero{max-width:400px;margin:auto;}
-    .hero img{width:100%;border-radius:10px;}
-    .buttons a{display:inline-block;background:var(--main-color);margin:0.5rem;padding:0.8rem 1.2rem;border-radius:6px;color:#fff;text-decoration:none;transition:transform .2s;}
-    .buttons a:hover{transform:scale(1.05);}
-    section{margin-top:2rem;text-align:left;}
-    .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;}
-    .service{background:#112;background:var(--bg-dark);padding:1rem;border-radius:8px;}
-    footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;}
-    footer a{color:var(--text-light);text-decoration:none;margin:0.3rem;}
-  </style>
 </head>
 <body>
   <header>
-    <div><img src="qr-code.png" alt="AEM Medenine" height="50"/></div>
     <nav>
-      <a href="#home">الصفحة</a>
-      <a href="#services">الخدمات</a>
-      <a href="#contact">اتصل بنا</a>
-      <button class="lang-btn" id="lang-toggle">EN</button>
+      <img src="logo.png" alt="AEM Logo" class="logo">
+      <ul>
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="photos.html">صور</a></li>
+        <li><a href="videos.html">فيديوهات</a></li>
+        <li><a href="download.html">تحميل</a></li>
+        <li><a href="#contact">اتصل بنا</a></li>
+      </ul>
+      <button class="lang-toggle">EN</button>
     </nav>
   </header>
 
   <main id="home">
-    <div class="hero">
-      <img src="logo.png" alt="ورشة إلكترونيك">
-    </div>
-    <h1 data-i18n="hero_title">مرحبا بكم في ورشة إلكترونيك مدنين</h1>
-    <p data-i18n="hero_text">نقدم خدمات إصلاح وبيع قطع إلكترونية عالية الجودة ومناسبة لكلّ مشروع.</p>
-    <div class="buttons">
-      <a href="#services" data-i18n="btn_services">خدماتنا</a>
-      <a href="https://wa.me/+21698192103" target="_blank" data-i18n="btn_whatsapp">واتساب</a>
-    </div>
-
-    <section id="services">
-      <h2 data-i18n="our_services">خدماتنا</h2>
-      <div class="services">
-        <div class="service">
-          <h3 data-i18n="srv_repair">إصلاح الأجهزة</h3>
-          <p data-i18n="srv_repair_text">تشخيص دقيق وسريع لجميع أنواع الأجهزة.</p>
-        </div>
-        <div class="service">
-          <h3 data-i18n="srv_sales">بيع قطع الغيار</h3>
-          <p data-i18n="srv_sales_text">قطع ذات جودة عالية وبأسعار مناسبة.</p>
-        </div>
-        <div class="service">
-          <h3 data-i18n="srv_embedded">أنظمة مضمنة</h3>
-          <p data-i18n="srv_embedded_text">تصميم متكامل لمشاريعك الإلكترونية.</p>
-        </div>
+    <section class="hero">
+      <img src="workshop.jpg" alt="ورشة إلكترونيك مدنين">
+      <h1 data-i18n="hero_title">مرحبا بكم في ورشة إلكترونيك مدنين</h1>
+      <p data-i18n="hero_text">نقدم خدمات إصلاح وبيع قطع إلكترونية عالية الجودة ومناسبة لكل مشروع.</p>
+      <div class="btns">
+        <a href="photos.html" class="btn" data-i18n="btn_photos">📸 صور</a>
+        <a href="videos.html" class="btn" data-i18n="btn_videos">🎥 فيديوهات</a>
+        <a href="download.html" class="btn" data-i18n="btn_download">📥 تحميل</a>
       </div>
+    </section>
+
+    <section id="contact">
+      <h2 data-i18n="contact_title">اتصل بنا</h2>
+      <p>📍 مدنين – تونس</p>
+      <p>📞 <a href="https://wa.me/123456789" target="_blank">واتساب</a></p>
+      <p>✉️ <a href="mailto:contact@atelier.com">contact@atelier.com</a></p>
     </section>
   </main>
 
-  <footer id="contact">
-    <p>© 2025 Atelier Électronique Médenine · <a href="mailto:contact@atelier.com">contact@atelier.com</a></p>
-    <div>
-      <a href="https://goo.gl/maps/..." target="_blank">موقعنا على Google Maps</a>
-    </div>
+  <footer>
+    <p>© 2025 Atelier Électronique Médenine</p>
   </footer>
 </body>
 </html>
