@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
       contact: "تواصل معنا",
       heroTitle: "🔧 ورشة إلكترونيك الرحماني",
       heroText: "تصليح جميع أنواع الكروت الإلكترونية – خدمة لجميع أنحاء تونس",
-      phone: "📞 تواصل معنا على",
+      phone: "تواصل معنا على",
       service1: "تصليح كروت إلكترونية",
       service2: "كمبيوترات وأجهزة",
       service3: "ثلاجات إنفرتر",
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       contact: "Contact",
       heroTitle: "🔧 Atelier Electronique Rahmani",
       heroText: "Repair of all types of electronic boards – Service across Tunisia",
-      phone: "📞 Contact us at",
+      phone: "Contact us at",
       service1: "Electronic board repair",
       service2: "Computers & Devices",
       service3: "Inverter Fridges",
@@ -43,39 +43,51 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  // دالة لتحديث النصوص حسب اللغة
+  function updateTexts(lang) {
+    const t = translations[lang];
+    document.querySelectorAll(".lang").forEach(el => {
+      const key = el.getAttribute("data-key");
+      if (t[key]) el.textContent = t[key];
+    });
+
+    // تحديث النص الخاص بالهاتف (في فقرة داخل hero)
+    const phonePara = document.querySelector(".hero p:nth-of-type(2)");
+    if (lang === "ar") {
+      phonePara.innerHTML = `${translations.ar.phone} <strong>+216 98 192 103</strong>`;
+    } else {
+      phonePara.innerHTML = `${translations.en.phone} <strong>+216 98 192 103</strong>`;
+    }
+
+    // تغيير اتجاه الصفحة ولغة html
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+    document.body.style.textAlign = lang === "ar" ? "right" : "left";
+  }
+
+  // تغيير اللغة عند الضغط على الزر
   langToggle.addEventListener("click", () => {
     currentLang = currentLang === "ar" ? "en" : "ar";
     langToggle.textContent = currentLang === "ar" ? "EN" : "AR";
-
-    const t = translations[currentLang];
-
-    document.querySelectorAll("nav ul li a")[0].textContent = t.home;
-    document.querySelectorAll("nav ul li a")[1].textContent = t.services;
-    document.querySelectorAll("nav ul li a")[2].textContent = t.gallery;
-    document.querySelectorAll("nav ul li a")[3].textContent = t.contact;
-
-    document.querySelector(".hero h1").textContent = t.heroTitle;
-    document.querySelector(".hero p:nth-of-type(1)").textContent = t.heroText;
-    document.querySelector(".hero p:nth-of-type(2)").innerHTML = `${t.phone} <strong>+216 98 192 103</strong>`;
-
-    document.querySelector("#services h2").textContent = t.services;
-    document.querySelectorAll(".service")[0].textContent = t.service1;
-    document.querySelectorAll(".service")[1].textContent = t.service2;
-    document.querySelectorAll(".service")[2].textContent = t.service3;
-    document.querySelectorAll(".service")[3].textContent = t.service4;
-
-    document.querySelector("#gallery h2").textContent = t.videoTitle;
-    document.querySelector("#contact h2").textContent = t.mapTitle;
-
-    document.querySelectorAll("#contact a")[0].textContent = t.whatsapp;
-    document.querySelectorAll("#contact a")[1].textContent = t.facebook;
-
-    document.querySelector("footer p:nth-of-type(1)").textContent = t.footerText;
-    document.querySelector("footer p:nth-of-type(2)").textContent = t.footerLoc;
-
-    // تغيير اتجاه الصفحة
-    document.documentElement.lang = currentLang;
-    document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
-    document.body.style.textAlign = currentLang === "ar" ? "right" : "left";
+    updateTexts(currentLang);
   });
+
+  // تفعيل الأنيميشن عند ظهور العناصر في الشاشة (intersection observer)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  // إضافة الكلاس للعنصر لبدء الأنيميشن
+  document.querySelectorAll(".fade-slide").forEach(el => {
+    observer.observe(el);
+  });
+
+  // تشغيل التحديث النصي الأولي
+  updateTexts(currentLang);
 });
