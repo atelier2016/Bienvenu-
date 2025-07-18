@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -6,27 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="icons/logo.png" type="image/png" />
+  <link rel="icon" href="logo.png" type="image/png" />
 </head>
 <body>
-  <header>
-    <img src="icons/logo.png" alt="Logo" class="logo" />
-    <h1>ورشة إلكترونيك الرحماني</h1>
-    <p>خبرة 10 سنوات في صيانة الإلكترونيات</p>
+  <header class="hero">
+    <img src="logo.png" alt="Logo" class="logo" />
+    <h1>ورشة إلكترونيك مدنين</h1>
+    <p>🔧 خبرة أكثر من 10 سنوات في تصليح الإلكترونيات</p>
   </header>
 
-  <section class="news-ticker">
-    <iframe src="https://feeds.bbci.co.uk/arabic/rss.xml" title="BBC Arabic News"></iframe>
+  <section class="news-bar" id="news-bar">📢 جارٍ تحميل الأخبار...</section>
+
+  <section class="info-bar">
+    ⏰ <span id="clock"></span> | 👁️‍🗨️ <span id="visits">0</span> زيارة
   </section>
 
-  <section class="hero">
-    <h2>خدمتك الإلكترونية وين ما كنت</h2>
-    <p>تصليح محترف – تغطية كاملة – توصيل مضمون</p>
-    <a href="https://wa.me/21698192103" class="btn">راسلنا على واتساب</a>
+  <section class="cta">
+    <a href="https://wa.me/21698192103" class="btn">💬 راسلنا واتساب</a>
+    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" class="btn">📍 موقع الورشة</a>
   </section>
 
-  <section class="gallery">
-    <h2>📷 صور من الورشة</h2>
+  <section class="gallery" id="gallery">
+    <h2>📸 صور من الورشة</h2>
     <div class="grid">
       <img src="images/1.jpg" alt="صورة 1" />
       <img src="images/2.jpg" alt="صورة 2" />
@@ -34,8 +34,8 @@
     </div>
   </section>
 
-  <section class="video-section">
-    <h2>🎥 فيديوهات شغل الورشة</h2>
+  <section class="videos">
+    <h2>🎥 فيديوهات الورشة</h2>
     <div class="grid">
       <video controls src="videos/1.mp4"></video>
       <video controls src="videos/2.mp4"></video>
@@ -43,29 +43,24 @@
   </section>
 
   <section class="faq">
-    <h2>❓الأسئلة المتكررة</h2>
-    <div class="faq-item">
-      <h3>كيف نبعتلك الجهاز؟</h3>
-      <p>عن طريق البريد السريع أو أي وسيلة نقل مضمونة.</p>
-    </div>
-    <div class="faq-item">
-      <h3>كيف نضمن أنو يتصلّح؟</h3>
-      <p>نرسل فيديو بالحالة قبل وبعد التصليح + ضمان.</p>
-    </div>
+    <h2>❓الأسئلة الشائعة</h2>
+    <details><summary>كيف نبعت الجهاز؟</summary><p>تبعثه عبر البريد ونصلّحوه ونرجعوه ليك.</p></details>
+    <details><summary>كيف نعرف حالة التصليح؟</summary><p>نبعثولك صور وفيديوهات بالحالة.</p></details>
+  </section>
+
+  <section class="radio">
+    <h2>📻 راديو القرآن الكريم</h2>
+    <iframe src="https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://radio.mp3quran.net:9992/;&t=.m3u" width="100%" height="30" frameborder="0"></iframe>
   </section>
 
   <section class="map">
-    <h2>📍 موقع الورشة</h2>
-    <iframe
-      src="https://maps.google.com/maps?q=atelier%20electronique%20medenine&t=&z=13&ie=UTF8&iwloc=&output=embed"
-      width="100%" height="300" allowfullscreen loading="lazy">
-    </iframe>
+    <h2>🗺️ موقعنا على Google Maps</h2>
+    <iframe src="https://maps.google.com/maps?q=Atelier%20Electronique%20M%C3%A9denine&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="300" frameborder="0" allowfullscreen></iframe>
   </section>
 
   <footer>
     <p>📍 مدنين – نخدمو في كامل أنحاء تونس</p>
-    <p>من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
-    <small>&copy; 2025 Atelier Electronique Médenine</small>
+    <p>🕗 من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
   </footer>
 
   <script src="script.js"></script>
