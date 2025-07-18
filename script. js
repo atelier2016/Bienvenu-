@@ -1,10 +1,36 @@
+const translations = {
+  ar: {
+    hero_title: "مرحبا بكم في ورشة إلكترونيك مدنين",
+    hero_text: "نقدم خدمات إصلاح وبيع قطع إلكترونية عالية الجودة ومناسبة لكل مشروع.",
+    btn_photos: "📸 صور",
+    btn_videos: "🎥 فيديوهات",
+    btn_download: "📥 تحميل",
+    contact_title: "اتصل بنا"
+  },
+  en: {
+    hero_title: "Welcome to Atelier Électronique Medenine",
+    hero_text: "We offer high‑quality repair services & electronic parts for every project.",
+    btn_photos: "Photos",
+    btn_videos: "Videos",
+    btn_download: "Downloads",
+    contact_title: "Contact Us"
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
-  // عداد زيارات مؤقت باستخدام LocalStorage
-  let visits = +localStorage.getItem("visits") || 0;
-  visits++;
-  localStorage.setItem("visits", visits);
-  const p = document.createElement("p");
-  p.style.marginTop = "1rem";
-  p.textContent = `عدد زياراتك: ${visits}`;
-  document.getElementById("home").appendChild(p);
+  const btn = document.querySelector(".lang-toggle");
+  let lang = localStorage.getItem("lang") || "ar";
+  const apply = () => {
+    btn.textContent = lang === "ar" ? "EN" : "AR";
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      el.textContent = translations[lang][key];
+    });
+  };
+  btn.addEventListener("click", () => {
+    lang = lang === "ar" ? "en" : "ar";
+    localStorage.setItem("lang", lang);
+    apply();
+  });
+  apply();
 });
