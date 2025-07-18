@@ -1,12 +1,165 @@
-document.getElementById("langToggle").addEventListener("click", () => {
-  const currentLang = document.documentElement.lang;
-  const newLang = currentLang === "ar" ? "en" : "ar";
-  document.documentElement.lang = newLang;
-  document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
-  document.getElementById("langToggle").innerText = newLang === "ar" ? "English" : "عربي";
-
-  // تغيّر النصوص
-  document.querySelectorAll("[data-ar]").forEach(el => {
-    el.innerText = newLang === "ar" ? el.dataset.ar : el.dataset.en;
+// FAQ toggle
+document.querySelectorAll('.faq-question').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const answer = btn.nextElementSibling;
+    const isVisible = answer.style.display === 'block';
+    // Hide all answers
+    document.querySelectorAll('.faq-answer').forEach((el) => (el.style.display = 'none'));
+    // Toggle current
+    answer.style.display = isVisible ? 'none' : 'block';
   });
 });
+
+// Language toggle Arabic <-> French
+const langToggle = document.getElementById('langToggle');
+
+const texts = {
+  ar: {
+    mainTitle: "ورشة إلكترونيك الرحماني - Atelier Electronique Médenine",
+    mainDesc: "خدمة إلكترونيك توصلك وين ما كنت في تونس 🇹🇳",
+    btnMaps: "خرائط Google",
+    btnWhatsApp: "واتساب",
+    servicesTitle: "خدماتنا",
+    servicesList: [
+      "تصليح وصيانة أجهزة إلكترونية: كمبيوتر، ثلاجات إنفرتر، كروت إلكترونية",
+      "بيع قطع غيار حسب الطلب",
+      "خدمة التشخيص عن بُعد بدقة عالية",
+      "إرسال الصور والفيديو بالحالة قبل الإصلاح",
+      "السرعة، الأمان، وضمان الخدمة"
+    ],
+    galleryTitle: "معرض الصور والفيديوهات",
+    radioTitle: "راديو القرآن",
+    newsTitle: "آخر الأخبار من BBC عربي",
+    newsLoading: "جاري تحميل الأخبار...",
+    faqTitle: "الأسئلة الشائعة",
+    faqItems: [
+      {
+        question: "كيف يمكنني إرسال جهازي للإصلاح؟",
+        answer: "تستطيع إرسال جهازك عبر البريد مع تعبئة نموذج التشخيص على موقعنا."
+      },
+      {
+        question: "هل تقدمون ضمانًا على الإصلاح؟",
+        answer: "نعم، نقدم ضمانًا لمدة 6 أشهر على جميع الخدمات."
+      }
+    ],
+    footerAddress: "مدنين – نخدمو في كامل أنحاء تونس",
+    footerHours: "من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة"
+  },
+  fr: {
+    mainTitle: "Atelier Electronique Médenine - Réparations électroniques",
+    mainDesc: "Service électronique qui vous atteint partout en Tunisie 🇹🇳",
+    btnMaps: "Google Maps",
+    btnWhatsApp: "WhatsApp",
+    servicesTitle: "Nos Services",
+    servicesList: [
+      "Réparation et maintenance d'appareils électroniques : ordinateurs, frigos inverter, cartes électroniques",
+      "Vente de pièces détachées sur demande",
+      "Diagnostic précis à distance",
+      "Envoi de photos et vidéos avant réparation",
+      "Rapidité, sécurité et garantie du service"
+    ],
+    galleryTitle: "Galerie photos et vidéos",
+    radioTitle: "Radio du Coran",
+    newsTitle: "Dernières nouvelles de BBC Arabe",
+    newsLoading: "Chargement des actualités...",
+    faqTitle: "Questions fréquentes",
+    faqItems: [
+      {
+        question: "Comment puis-je envoyer mon appareil pour réparation ?",
+        answer: "Vous pouvez envoyer votre appareil par courrier avec un formulaire de diagnostic sur notre site."
+      },
+      {
+        question: "Offrez-vous une garantie sur la réparation ?",
+        answer: "Oui, nous offrons une garantie de 6 mois sur tous les services."
+      }
+    ],
+    footerAddress: "Medenine – Service dans toute la Tunisie",
+    footerHours: "Du lundi au samedi, 08h00 - 18h00 | dimanche fermé"
+  }
+};
+
+function setLanguage(lang) {
+  document.getElementById('mainTitle').textContent = texts[lang].mainTitle;
+  document.getElementById('mainDesc').textContent = texts[lang].mainDesc;
+  document.getElementById('btnMaps').textContent = texts[lang].btnMaps;
+  document.getElementById('btnWhatsApp').textContent = texts[lang].btnWhatsApp;
+  document.getElementById('servicesTitle').textContent = texts[lang].servicesTitle;
+
+  const servicesList = document.getElementById('servicesList');
+  servicesList.innerHTML = '';
+  texts[lang].servicesList.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    servicesList.appendChild(li);
+  });
+
+  document.getElementById('galleryTitle').textContent = texts[lang].galleryTitle;
+  document.getElementById('radioTitle').textContent = texts[lang].radioTitle;
+  document.getElementById('newsTitle').textContent = texts[lang].newsTitle;
+
+  document.getElementById('faqTitle').textContent = texts[lang].faqTitle;
+  const faqItems = texts[lang].faqItems;
+  const faqContainer = document.querySelector('.faq');
+  // Remove old faq items except the title
+  faqContainer.querySelectorAll('.faq-item').forEach(el => el.remove());
+
+  faqItems.forEach(faq => {
+    const faqItem = document.createElement('div');
+    faqItem.classList.add('faq-item');
+
+    const btn = document.createElement('button');
+    btn.classList.add('faq-question');
+    btn.textContent = faq.question;
+
+    const ans = document.createElement('div');
+    ans.classList.add('faq-answer');
+    ans.textContent = faq.answer;
+
+    faqItem.appendChild(btn);
+    faqItem.appendChild(ans);
+    faqContainer.appendChild(faqItem);
+
+    // Add toggle event
+    btn.addEventListener('click', () => {
+      const visible = ans.style.display === 'block';
+      document.querySelectorAll('.faq-answer').forEach(el => (el.style.display = 'none'));
+      ans.style.display = visible ? 'none' : 'block';
+    });
+  });
+
+  document.getElementById('footerAddress').textContent = texts[lang].footerAddress;
+  document.getElementById('footerHours').textContent = texts[lang].footerHours;
+
+  // Direction & lang attribute update
+  if (lang === 'ar') {
+    document.documentElement.lang = 'ar';
+    document.documentElement.dir = 'rtl';
+  } else {
+    document.documentElement.lang = 'fr';
+    document.documentElement.dir = 'ltr';
+  }
+}
+
+let currentLang = 'ar';
+
+langToggle.addEventListener('click', () => {
+  currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+  setLanguage(currentLang);
+  langToggle.textContent = currentLang === 'ar' ? 'Français' : 'عربي';
+});
+
+// Initial load
+setLanguage(currentLang);
+
+// Fetch BBC Arabic RSS feed (simplified)
+const newsList = document.getElementById('newsList');
+newsList.textContent = texts.ar.newsLoading;
+
+// To avoid CORS issues, real fetch needs a proxy or backend; so here just sample data:
+setTimeout(() => {
+  newsList.innerHTML = `
+    <li>تونس تُجهز لموسم سياحي ناجح رغم التحديات</li>
+    <li>موجة حرّ تضرب البلاد وسط تحذيرات من الدفاع المدني</li>
+    <li>تطورات جديدة في قطاع الإلكترونيات وصيانة الأجهزة</li>
+  `;
+}, 1500);
