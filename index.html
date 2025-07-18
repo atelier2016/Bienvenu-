@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -5,75 +6,66 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="logo.png" />
+  <link rel="icon" href="icons/logo.png" type="image/png" />
 </head>
 <body>
-  <header class="header">
-    <img src="logo.png" alt="Logo" class="logo" />
-    <div class="language-toggle" onclick="toggleLanguage()">🌐</div>
+  <header>
+    <img src="icons/logo.png" alt="Logo" class="logo" />
+    <h1>ورشة إلكترونيك الرحماني</h1>
+    <p>خبرة 10 سنوات في صيانة الإلكترونيات</p>
   </header>
 
-  <section class="news-bar">
-    <marquee behavior="scroll" direction="right" id="newsTicker">📢 آخر الأخبار من BBC عربي...</marquee>
+  <section class="news-ticker">
+    <iframe src="https://feeds.bbci.co.uk/arabic/rss.xml" title="BBC Arabic News"></iframe>
   </section>
 
-  <section class="clock-visitor">
-    <div id="clock"></div>
-    <div id="visits">👁️ عدد الزوار: <span id="visitCount">0</span></div>
-  </section>
-
-  <section class="cta">
-    <h1>خدماتنا الإلكترونية في كل تونس</h1>
-    <p>تصليح كروت إلكترونية، كمبيوتر، أجهزة منزلية وغيرها.</p>
-    <a href="https://wa.me/21698192103" class="button">📲 تواصل عبر واتساب</a>
+  <section class="hero">
+    <h2>خدمتك الإلكترونية وين ما كنت</h2>
+    <p>تصليح محترف – تغطية كاملة – توصيل مضمون</p>
+    <a href="https://wa.me/21698192103" class="btn">راسلنا على واتساب</a>
   </section>
 
   <section class="gallery">
     <h2>📷 صور من الورشة</h2>
-    <div class="grid" id="photoGallery"></div>
-    <a href="photos.html" class="button">عرض الكل</a>
+    <div class="grid">
+      <img src="images/1.jpg" alt="صورة 1" />
+      <img src="images/2.jpg" alt="صورة 2" />
+      <img src="images/3.jpg" alt="صورة 3" />
+    </div>
   </section>
 
-  <section class="videos">
-    <h2>🎥 فيديوهات</h2>
-    <div class="grid" id="videoGallery"></div>
-    <a href="videos.html" class="button">مشاهدة المزيد</a>
-  </section>
-
-  <section class="services">
-    <h2>🔧 خدماتنا</h2>
-    <ul>
-      <li>تشخيص الأعطال</li>
-      <li>تصليح شامل احترافي</li>
-      <li>متابعة بالصور والفيديو</li>
-      <li>إرجاع الجهاز بالبريد</li>
-    </ul>
+  <section class="video-section">
+    <h2>🎥 فيديوهات شغل الورشة</h2>
+    <div class="grid">
+      <video controls src="videos/1.mp4"></video>
+      <video controls src="videos/2.mp4"></video>
+    </div>
   </section>
 
   <section class="faq">
-    <h2>❓ أسئلة شائعة</h2>
+    <h2>❓الأسئلة المتكررة</h2>
     <div class="faq-item">
-      <button class="faq-question">كيف نبعت الجهاز للورشة؟</button>
-      <div class="faq-answer">تبعتو عبر البريد، نصلحو ونرجعو ليك بالبريد مضمون.</div>
+      <h3>كيف نبعتلك الجهاز؟</h3>
+      <p>عن طريق البريد السريع أو أي وسيلة نقل مضمونة.</p>
     </div>
     <div class="faq-item">
-      <button class="faq-question">هل توجد ضمانات بعد التصليح؟</button>
-      <div class="faq-answer">أكيد، نعطيوك فيديو ونتكفلو بجودة الخدمة.</div>
+      <h3>كيف نضمن أنو يتصلّح؟</h3>
+      <p>نرسل فيديو بالحالة قبل وبعد التصليح + ضمان.</p>
     </div>
   </section>
 
-  <section class="radio-map">
-    <h2>📻 راديو القرآن</h2>
-    <audio controls autoplay>
-      <source src="https://stream.radiojar.com/0tpy1u0kxtzuv" type="audio/mpeg">
-    </audio>
-    <h2>🗺️ موقع الورشة</h2>
-    <iframe src="https://maps.google.com/maps?q=Atelier%20Electronique%20Médenine&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0;" allowfullscreen></iframe>
+  <section class="map">
+    <h2>📍 موقع الورشة</h2>
+    <iframe
+      src="https://maps.google.com/maps?q=atelier%20electronique%20medenine&t=&z=13&ie=UTF8&iwloc=&output=embed"
+      width="100%" height="300" allowfullscreen loading="lazy">
+    </iframe>
   </section>
 
-  <footer class="footer">
-    <p>مدنين – نخدمو في كامل أنحاء تونس</p>
+  <footer>
+    <p>📍 مدنين – نخدمو في كامل أنحاء تونس</p>
     <p>من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
+    <small>&copy; 2025 Atelier Electronique Médenine</small>
   </footer>
 
   <script src="script.js"></script>
