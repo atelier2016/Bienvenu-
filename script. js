@@ -1,93 +1,12 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const langToggle = document.getElementById("lang-toggle");
-  let currentLang = "ar"; // اللغة الابتدائية
+document.getElementById("langToggle").addEventListener("click", () => {
+  const currentLang = document.documentElement.lang;
+  const newLang = currentLang === "ar" ? "en" : "ar";
+  document.documentElement.lang = newLang;
+  document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
+  document.getElementById("langToggle").innerText = newLang === "ar" ? "English" : "عربي";
 
-  const translations = {
-    ar: {
-      home: "الرئيسية",
-      services: "الخدمات",
-      gallery: "المعرض",
-      contact: "تواصل معنا",
-      heroTitle: "🔧 ورشة إلكترونيك الرحماني",
-      heroText: "تصليح جميع أنواع الكروت الإلكترونية – خدمة لجميع أنحاء تونس",
-      phone: "تواصل معنا على",
-      service1: "تصليح كروت إلكترونية",
-      service2: "كمبيوترات وأجهزة",
-      service3: "ثلاجات إنفرتر",
-      service4: "بيع قطع غيار",
-      videoTitle: "📽️ فيديو تعريفي",
-      mapTitle: "📍 موقع الورشة",
-      whatsapp: "راسلنا على واتساب",
-      facebook: "تابعنا على فايسبوك",
-      footerText: "© 2025 ورشة إلكترونيك الرحماني - جميع الحقوق محفوظة",
-      footerLoc: "مدنين، تونس | من الإثنين للسبت، 08:00 - 18:00",
-    },
-    en: {
-      home: "Home",
-      services: "Services",
-      gallery: "Gallery",
-      contact: "Contact",
-      heroTitle: "🔧 Atelier Electronique Rahmani",
-      heroText: "Repair of all types of electronic boards – Service across Tunisia",
-      phone: "Contact us at",
-      service1: "Electronic board repair",
-      service2: "Computers & Devices",
-      service3: "Inverter Fridges",
-      service4: "Spare Parts",
-      videoTitle: "📽️ Intro Video",
-      mapTitle: "📍 Workshop Location",
-      whatsapp: "Chat on WhatsApp",
-      facebook: "Follow us on Facebook",
-      footerText: "© 2025 Atelier Electronique Rahmani - All rights reserved",
-      footerLoc: "Médenine, Tunisia | Mon-Sat, 08:00 - 18:00",
-    }
-  };
-
-  // دالة لتحديث النصوص حسب اللغة
-  function updateTexts(lang) {
-    const t = translations[lang];
-    document.querySelectorAll(".lang").forEach(el => {
-      const key = el.getAttribute("data-key");
-      if (t[key]) el.textContent = t[key];
-    });
-
-    // تحديث النص الخاص بالهاتف (في فقرة داخل hero)
-    const phonePara = document.querySelector(".hero p:nth-of-type(2)");
-    if (lang === "ar") {
-      phonePara.innerHTML = `${translations.ar.phone} <strong>+216 98 192 103</strong>`;
-    } else {
-      phonePara.innerHTML = `${translations.en.phone} <strong>+216 98 192 103</strong>`;
-    }
-
-    // تغيير اتجاه الصفحة ولغة html
-    document.documentElement.lang = lang;
-    document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-    document.body.style.textAlign = lang === "ar" ? "right" : "left";
-  }
-
-  // تغيير اللغة عند الضغط على الزر
-  langToggle.addEventListener("click", () => {
-    currentLang = currentLang === "ar" ? "en" : "ar";
-    langToggle.textContent = currentLang === "ar" ? "EN" : "AR";
-    updateTexts(currentLang);
+  // تغيّر النصوص
+  document.querySelectorAll("[data-ar]").forEach(el => {
+    el.innerText = newLang === "ar" ? el.dataset.ar : el.dataset.en;
   });
-
-  // تفعيل الأنيميشن عند ظهور العناصر في الشاشة (intersection observer)
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  }, {
-    threshold: 0.1
-  });
-
-  // إضافة الكلاس للعنصر لبدء الأنيميشن
-  document.querySelectorAll(".fade-slide").forEach(el => {
-    observer.observe(el);
-  });
-
-  // تشغيل التحديث النصي الأولي
-  updateTexts(currentLang);
 });
