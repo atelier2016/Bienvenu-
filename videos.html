@@ -1,41 +1,25 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>🎥 فيديوهات الورشة | AEM</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📽️ معرض الفيديوهات</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { font-family: sans-serif; background: #0d1117; color: #fff; text-align: center; }
+    .videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 20px; }
+    video { width: 100%; border-radius: 10px; box-shadow: 0 0 10px #000; }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <h1 data-ar="🎥 فيديوهات الورشة" data-fr="🎥 Vidéos de l'atelier">🎥 فيديوهات الورشة</h1>
-    <button class="lang-toggle" onclick="toggleLanguage()">FR</button>
-  </header>
-
-  <section class="gallery">
-    <div class="video-card">
-      <video controls poster="assets/vidthumb1.jpg">
-        <source src="videos/repair1.mp4" type="video/mp4">
-      </video>
-      <div class="actions">
-        <button onclick="react(this, 'like')">👍</button>
-        <button onclick="react(this, 'love')">❤️</button>
-        <button onclick="react(this, 'laugh')">😂</button>
-      </div>
-      <div class="comments">
-        <input type="text" placeholder="💬 أضف تعليقك" onkeydown="addComment(event, this)">
-        <ul class="comment-list"></ul>
-      </div>
-    </div>
-    <!-- أضف فيديوهات أخرى بنفس البلوك -->
-  </section>
-
-  <footer class="footer">
-    <p data-ar="مدنين – نخدمو كامل الجمهورية" data-fr="Médenine – Nous desservons toute la Tunisie">
-      مدنين – نخدمو كامل الجمهورية
-    </p>
-  </footer>
-
-  <script src="script.js"></script>
+  <h1>🎞️ معرض الفيديوهات</h1>
+  <div class="videos">
+    <video controls src="video1.mp4"></video>
+    <video controls src="video2.mp4"></video>
+    <video controls src="video3.mp4"></video>
+    <video controls src="video4.mp4"></video>
+    <video controls src="video5.mp4"></video>
+    <video controls src="video6.mp4"></video>
+  </div>
 </body>
 </html>
