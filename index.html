@@ -1,59 +1,72 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🔧 Atelier Electronique Médenine</title>
+  <title>ورشة إلكترونيك الرحماني – Médenine</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
   <link rel="icon" href="images/logo.png" />
 </head>
 <body>
+
+  <!-- ✅ رأس الصفحة -->
   <header>
-    <img src="images/logo.png" alt="Logo" class="logo" />
-    <button id="langToggle">🇫🇷</button>
+    <img src="images/logo.png" alt="شعار الورشة" class="logo" />
+    <nav>
+      <ul>
+        <li><a href="#">الرئيسية</a></li>
+        <li><a href="#services">الخدمات</a></li>
+        <li><a href="#gallery">المعرض</a></li>
+        <li><a href="#contact">تواصل معنا</a></li>
+      </ul>
+    </nav>
+    <button id="lang-toggle">EN</button>
   </header>
 
-  <div class="news-ticker" id="news"></div>
-  <div class="time-visits">
-    <span id="clock"></span> | 👁️ عدد الزوار: <span id="visits"></span>
-  </div>
-
-  <section class="cta">
-    <h1>ورشتك الإلكترونية تخدمك في كامل تراب الجمهورية!</h1>
-    <p>تصليح كروت إلكترونية، أجهزة كمبيوتر، ثلاجات إنفرتر وأكثر</p>
-    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn map">📍 موقعنا على الخريطة</a>
-    <a href="https://wa.me/21698192103" class="btn whatsapp">📲 تواصل واتساب</a>
+  <!-- ✅ ترحيب -->
+  <section class="hero">
+    <h1>🔧 ورشة إلكترونيك الرحماني</h1>
+    <p>تصليح جميع أنواع الكروت الإلكترونية – خدمة لجميع أنحاء تونس</p>
+    <p>📞 تواصل معنا على <strong>+216 98 192 103</strong></p>
   </section>
 
-  <section class="gallery-link">
-    <a href="photos.html" class="btn">📸 معرض الصور</a>
-    <a href="videos.html" class="btn">🎥 فيديوهات الورشة</a>
-    <a href="download.html" class="btn">📥 تحميل البرامج</a>
-  </section>
-
-  <section class="radio-section">
-    <h2>📻 استمع للقرآن الكريم</h2>
-    <iframe src="https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://stream.radiojar.com/0tpy1hyk8k8uv&l=1" frameborder="0" allow="autoplay" class="radio-player"></iframe>
-  </section>
-
-  <section class="faq">
-    <h2>❓ الأسئلة الشائعة</h2>
-    <div class="faq-item">
-      <button class="faq-question">كيف نرسل الجهاز للورشة؟</button>
-      <div class="faq-answer">تبعث الجهاز عبر البريد مع رقمك. بعد التشخيص نبعثولك الصور والتكلفة.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question">هل نخدمو كل ولايات تونس؟</button>
-      <div class="faq-answer">نعم، نوصلو ونرجعو بالبريد لأي ولاية في الجمهورية.</div>
+  <!-- ✅ الخدمات -->
+  <section id="services">
+    <h2>خدماتنا</h2>
+    <div class="services-grid">
+      <div class="service">تصليح كروت إلكترونية</div>
+      <div class="service">كمبيوترات وأجهزة</div>
+      <div class="service">ثلاجات إنفرتر</div>
+      <div class="service">بيع قطع غيار</div>
     </div>
   </section>
 
+  <!-- ✅ الفيديو التعريفي -->
+  <section id="gallery">
+    <h2>📽️ فيديو تعريفي</h2>
+    <video controls poster="images/logo.png" width="100%">
+      <source src="media/video.mp4" type="video/mp4">
+      متصفحك لا يدعم تشغيل الفيديو.
+    </video>
+  </section>
+
+  <!-- ✅ خريطة الورشة -->
+  <section id="contact">
+    <h2>📍 موقع الورشة</h2>
+    <iframe
+      src="https://maps.google.com/maps?q=مدنين&t=&z=15&ie=UTF8&iwloc=&output=embed"
+      width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
+    </iframe>
+    <p>📱 <a href="https://wa.me/21698192103" target="_blank">راسلنا على واتساب</a></p>
+    <p>🌐 <a href="https://www.facebook.com/AEMednine" target="_blank">تابعنا على فايسبوك</a></p>
+  </section>
+
+  <!-- ✅ فوتر -->
   <footer>
-    <p>🔧 مدنين – نخدمو في كامل أنحاء تونس</p>
-    <p>🕒 من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
+    <p>© 2025 ورشة إلكترونيك الرحماني - جميع الحقوق محفوظة</p>
+    <p>مدنين، تونس | من الإثنين للسبت، 08:00 - 18:00</p>
   </footer>
 
-  <script src="script.js"></script>
 </body>
 </html>
