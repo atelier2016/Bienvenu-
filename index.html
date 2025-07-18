@@ -2,70 +2,114 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>ورشة إلكترونيك الرحماني – Médenine</title>
+  <link rel="icon" href="logo.png" />
+  <!-- خط Cairo -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet" />
+  <!-- أيقونات Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pzwCyM7qXvNPspcqvEj8ZdXY30l4B1t2Zke00XUJZ49LQFZRW8wwFkqcoKXUG7t9R4pKZ7EtjvYJrWRtJT6j2g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
-  <link rel="icon" href="logo.png" />
 </head>
 <body>
 
-  <!-- ✅ رأس الصفحة -->
+  <!-- Header -->
   <header>
-    <img src="logo.png" alt="شعار الورشة" class="logo" />
-    <nav>
-      <ul>
-        <li><a href="#">الرئيسية</a></li>
-        <li><a href="#services">الخدمات</a></li>
-        <li><a href="#gallery">المعرض</a></li>
-        <li><a href="#contact">تواصل معنا</a></li>
-      </ul>
-    </nav>
-    <button id="lang-toggle">EN</button>
+    <div class="container header-inner">
+      <img src="logo.png" alt="شعار الورشة" class="logo" />
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#home"><i class="fa-solid fa-house"></i> <span class="lang" data-key="home">الرئيسية</span></a></li>
+          <li><a href="#services"><i class="fa-solid fa-tools"></i> <span class="lang" data-key="services">الخدمات</span></a></li>
+          <li><a href="#gallery"><i class="fa-solid fa-photo-video"></i> <span class="lang" data-key="gallery">المعرض</span></a></li>
+          <li><a href="#contact"><i class="fa-solid fa-envelope"></i> <span class="lang" data-key="contact">تواصل معنا</span></a></li>
+        </ul>
+      </nav>
+      <button id="lang-toggle" aria-label="تغيير اللغة">EN</button>
+    </div>
   </header>
 
-  <!-- ✅ ترحيب -->
-  <section class="hero">
-    <h1>🔧 ورشة إلكترونيك الرحماني</h1>
-    <p>تصليح جميع أنواع الكروت الإلكترونية – خدمة لجميع أنحاء تونس</p>
-    <p>📞 تواصل معنا على <strong>+216 98 192 103</strong></p>
-  </section>
-
-  <!-- ✅ الخدمات -->
-  <section id="services">
-    <h2>خدماتنا</h2>
-    <div class="services-grid">
-      <div class="service">تصليح كروت إلكترونية</div>
-      <div class="service">كمبيوترات وأجهزة</div>
-      <div class="service">ثلاجات إنفرتر</div>
-      <div class="service">بيع قطع غيار</div>
+  <!-- Hero Section -->
+  <section id="home" class="hero section">
+    <div class="container text-center">
+      <h1 class="lang" data-key="heroTitle">🔧 ورشة إلكترونيك الرحماني</h1>
+      <p class="lang" data-key="heroText">تصليح جميع أنواع الكروت الإلكترونية – خدمة لجميع أنحاء تونس</p>
+      <p><i class="fa-solid fa-phone"></i> <span class="lang" data-key="phone">تواصل معنا على</span> <strong>+216 98 192 103</strong></p>
     </div>
   </section>
 
-  <!-- ✅ الفيديو التعريفي -->
-  <section id="gallery">
-    <h2>📽️ فيديو تعريفي</h2>
-    <video controls poster="logo.png" width="100%">
-      <source src="video.mp4" type="video/mp4">
-      متصفحك لا يدعم تشغيل الفيديو.
-    </video>
+  <!-- Services Section -->
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="lang" data-key="services">خدماتنا</h2>
+      <div class="services-grid">
+        <div class="service">
+          <i class="fa-solid fa-cogs fa-2x"></i>
+          <p class="lang" data-key="service1">تصليح كروت إلكترونية</p>
+        </div>
+        <div class="service">
+          <i class="fa-solid fa-computer fa-2x"></i>
+          <p class="lang" data-key="service2">كمبيوترات وأجهزة</p>
+        </div>
+        <div class="service">
+          <i class="fa-solid fa-snowflake fa-2x"></i>
+          <p class="lang" data-key="service3">ثلاجات إنفرتر</p>
+        </div>
+        <div class="service">
+          <i class="fa-solid fa-box-open fa-2x"></i>
+          <p class="lang" data-key="service4">بيع قطع غيار</p>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- ✅ خريطة الورشة -->
-  <section id="contact">
-    <h2>📍 موقع الورشة</h2>
-    <iframe
-      src="https://maps.google.com/maps?q=مدنين&t=&z=15&ie=UTF8&iwloc=&output=embed"
-      width="100%" height="300" style="border:0;" allowfullscreen loading="lazy">
-    </iframe>
-    <p>📱 <a href="https://wa.me/21698192103" target="_blank">راسلنا على واتساب</a></p>
-    <p>🌐 <a href="https://www.facebook.com/AEMednine" target="_blank">تابعنا على فايسبوك</a></p>
+  <!-- Gallery / Video Section -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <h2 class="lang" data-key="videoTitle">📽️ فيديو تعريفي</h2>
+      <video controls poster="logo.png" class="video-player" preload="metadata">
+        <source src="media/video.mp4" type="video/mp4" />
+        متصفحك لا يدعم تشغيل الفيديو.
+      </video>
+    </div>
   </section>
 
-  <!-- ✅ فوتر -->
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="lang" data-key="mapTitle">📍 موقع الورشة</h2>
+      <div class="map-wrapper">
+        <iframe
+          src="https://maps.google.com/maps?q=مدنين&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          allowfullscreen
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+      <div class="contact-links">
+        <a href="https://wa.me/21698192103" target="_blank" rel="noopener" class="whatsapp-link">
+          <i class="fa-brands fa-whatsapp"></i> <span class="lang" data-key="whatsapp">راسلنا على واتساب</span>
+        </a>
+        <a href="https://www.facebook.com/AEMednine" target="_blank" rel="noopener" class="facebook-link">
+          <i class="fa-brands fa-facebook"></i> <span class="lang" data-key="facebook">تابعنا على فايسبوك</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>© 2025 ورشة إلكترونيك الرحماني - جميع الحقوق محفوظة</p>
-    <p>مدنين، تونس | من الإثنين للسبت، 08:00 - 18:00</p>
+    <div class="container text-center">
+      <p class="lang" data-key="footerText">© 2025 ورشة إلكترونيك الرحماني - جميع الحقوق محفوظة</p>
+      <p class="lang" data-key="footerLoc">مدنين، تونس | من الإثنين للسبت، 08:00 - 18:00</p>
+    </div>
   </footer>
 
 </body>
