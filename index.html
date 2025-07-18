@@ -1,90 +1,76 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ورشة إلكترونيك الرحماني - Atelier Electronique Médenine</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="favicon.ico" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ورشة إلكترونيك الرحماني - Atelier Electronique Médenine</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="favicon.ico" />
 </head>
 <body>
-  <header>
-    <div class="container header-flex">
-      <div class="logo">
-        <img src="logo.png" alt="لوغو ورشة إلكترونيك الرحماني" />
-      </div>
-      <button id="langToggle" aria-label="تبديل اللغة">Français</button>
+<header>
+  <div class="container header-flex">
+    <div class="logo">
+      <img src="logo.png" alt="لوغو ورشة إلكترونيك الرحماني" />
     </div>
-  </header>
+    <button id="langToggle" aria-label="تبديل اللغة">English</button>
+  </div>
+</header>
 
-  <section class="hero container">
-    <h1 id="mainTitle">ورشة إلكترونيك الرحماني - Atelier Electronique Médenine</h1>
-    <p id="mainDesc">خدمة إلكترونيك توصلك وين ما كنت في تونس 🇹🇳</p>
-    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn" id="btnMaps">خرائط Google</a>
-    <a href="https://wa.me/21698192103" target="_blank" class="btn whatsapp" id="btnWhatsApp">واتساب</a>
-  </section>
+<section class="hero container">
+  <h1 id="mainTitle"></h1>
+  <p id="mainDesc"></p>
+  <div class="btn-group">
+    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn" id="btnMaps"></a>
+    <a href="https://wa.me/21698192103" target="_blank" class="btn whatsapp" id="btnWhatsApp"></a>
+  </div>
+</section>
 
-  <section class="info container">
-    <h2 id="servicesTitle">خدماتنا</h2>
-    <ul id="servicesList">
-      <li>تصليح وصيانة أجهزة إلكترونية: كمبيوتر، ثلاجات إنفرتر، كروت إلكترونية</li>
-      <li>بيع قطع غيار حسب الطلب</li>
-      <li>خدمة التشخيص عن بُعد بدقة عالية</li>
-      <li>إرسال الصور والفيديو بالحالة قبل الإصلاح</li>
-      <li>السرعة، الأمان، وضمان الخدمة</li>
-    </ul>
-  </section>
+<section class="info container">
+  <h2 id="servicesTitle"></h2>
+  <ul id="servicesList"></ul>
+</section>
 
-  <section class="gallery container">
-    <h2 id="galleryTitle">معرض الصور والفيديوهات</h2>
-    <div class="media-grid">
-      <img src="photo1.jpg" alt="تصليح كارت إلكترونية" class="media-item" />
-      <img src="photo2.jpg" alt="فني يصنع قطعة إلكترونية" class="media-item" />
-      <video class="media-item" controls>
-        <source src="videos/workshop.mp4" type="video/mp4" />
-        المتصفح لا يدعم عرض الفيديو.
-      </video>
+<section class="gallery container">
+  <h2 id="galleryTitle"></h2>
+  <div class="media-grid">
+    <img src="images/repair1.jpg" alt="" class="media-item" />
+    <img src="images/repair2.jpg" alt="" class="media-item" />
+    <video class="media-item" controls>
+      <source src="videos/workshop.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  </div>
+</section>
+
+<section class="radio-news container">
+  <div class="radio">
+    <h2 id="radioTitle"></h2>
+    <audio controls id="radioPlayer" src="https://server8.mp3quran.net/afs/001.mp3"></audio>
+  </div>
+  <div class="news">
+    <h2 id="newsTitle"></h2>
+    <ul id="newsList"><li></li></ul>
+  </div>
+</section>
+
+<section class="faq container">
+  <h2 id="faqTitle"></h2>
+</section>
+
+<footer>
+  <div class="container footer-flex">
+    <div class="footer-left">
+      <p id="footerAddress"></p>
+      <p id="footerHours"></p>
     </div>
-  </section>
+    <div class="footer-right">
+      <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" aria-label="موقع الورشة على خرائط Google">📍</a>
+      <a href="https://wa.me/21698192103" target="_blank" aria-label="واتساب">📲</a>
+    </div>
+  </div>
+</footer>
 
-  <section class="radio-news container">
-    <div class="radio">
-      <h2 id="radioTitle">راديو القرآن</h2>
-      <audio controls id="radioPlayer" src="https://server8.mp3quran.net/afs/001.mp3"></audio>
-    </div>
-    <div class="news">
-      <h2 id="newsTitle">آخر الأخبار من BBC عربي</h2>
-      <ul id="newsList">
-        <li>جاري تحميل الأخبار...</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="faq container">
-    <h2 id="faqTitle">الأسئلة الشائعة</h2>
-    <div class="faq-item">
-      <button class="faq-question">كيف يمكنني إرسال جهازي للإصلاح؟</button>
-      <div class="faq-answer">تستطيع إرسال جهازك عبر البريد مع تعبئة نموذج التشخيص على موقعنا.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question">هل تقدمون ضمانًا على الإصلاح؟</button>
-      <div class="faq-answer">نعم، نقدم ضمانًا لمدة 6 أشهر على جميع الخدمات.</div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="container footer-flex">
-      <div class="footer-left">
-        <p id="footerAddress">مدنين – نخدمو في كامل أنحاء تونس</p>
-        <p id="footerHours">من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
-      </div>
-      <div class="footer-right">
-        <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" aria-label="موقع الورشة على خرائط Google">📍</a>
-        <a href="https://wa.me/21698192103" target="_blank" aria-label="واتساب">📲</a>
-      </div>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
