@@ -1,55 +1,81 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📥 تحميل | فيديوهات | صور</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Atelier Electronique Médenine</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="logo.png" />
 </head>
 <body>
-  <header>
-    <h1>📥 التحميلات</h1>
-    <nav>
-      <a href="#downloads">البرامج</a>
-      <a href="#videos">🎬 فيديوهات</a>
-      <a href="#photos">🖼️ صور</a>
-    </nav>
-  </header>  <main>
-    <section id="downloads" class="section">
-      <h2>📥 تحميل البرامج</h2>
-      <div class="download-item">
-        <img src="img/ccleaner.png" alt="CCleaner">
-        <h3>CCleaner</h3>
-        <a href="downloads/ccsetup.exe" download class="btn">⬇️ تحميل</a>
-      </div>
-      <!-- أضف المزيد من البرامج هنا -->
-    </section><section id="videos" class="section">
-  <h2>🎬 فيديوهات الورشة</h2>
-  <div class="media-gallery">
-    <div class="video-box">
-      <video controls poster="img/thumb1.jpg">
-        <source src="videos/video1.mp4" type="video/mp4">
-        متصفحك لا يدعم الفيديو
-      </video>
-      <p>شرح تصليح كارت ثلاجة</p>
-    </div>
-    <!-- أضف المزيد من الفيديوهات -->
-  </div>
-</section>
+  <header class="header">
+    <img src="logo.png" alt="Logo" class="logo" />
+    <div class="language-toggle" onclick="toggleLanguage()">🌐</div>
+  </header>
 
-<section id="photos" class="section">
-  <h2>🖼️ صور من الورشة</h2>
-  <div class="media-gallery">
-    <div class="photo-box">
-      <img src="photos/photo1.jpg" alt="ورشة">
-      <p>تصليح كارت أم</p>
-    </div>
-    <!-- أضف المزيد من الصور -->
-  </div>
-</section>
+  <section class="news-bar">
+    <marquee behavior="scroll" direction="right" id="newsTicker">📢 آخر الأخبار من BBC عربي...</marquee>
+  </section>
 
-  </main>  <footer>
-    <p>&copy; 2025 Atelier Electronique Médenine</p>
+  <section class="clock-visitor">
+    <div id="clock"></div>
+    <div id="visits">👁️ عدد الزوار: <span id="visitCount">0</span></div>
+  </section>
+
+  <section class="cta">
+    <h1>خدماتنا الإلكترونية في كل تونس</h1>
+    <p>تصليح كروت إلكترونية، كمبيوتر، أجهزة منزلية وغيرها.</p>
+    <a href="https://wa.me/21698192103" class="button">📲 تواصل عبر واتساب</a>
+  </section>
+
+  <section class="gallery">
+    <h2>📷 صور من الورشة</h2>
+    <div class="grid" id="photoGallery"></div>
+    <a href="photos.html" class="button">عرض الكل</a>
+  </section>
+
+  <section class="videos">
+    <h2>🎥 فيديوهات</h2>
+    <div class="grid" id="videoGallery"></div>
+    <a href="videos.html" class="button">مشاهدة المزيد</a>
+  </section>
+
+  <section class="services">
+    <h2>🔧 خدماتنا</h2>
+    <ul>
+      <li>تشخيص الأعطال</li>
+      <li>تصليح شامل احترافي</li>
+      <li>متابعة بالصور والفيديو</li>
+      <li>إرجاع الجهاز بالبريد</li>
+    </ul>
+  </section>
+
+  <section class="faq">
+    <h2>❓ أسئلة شائعة</h2>
+    <div class="faq-item">
+      <button class="faq-question">كيف نبعت الجهاز للورشة؟</button>
+      <div class="faq-answer">تبعتو عبر البريد، نصلحو ونرجعو ليك بالبريد مضمون.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">هل توجد ضمانات بعد التصليح؟</button>
+      <div class="faq-answer">أكيد، نعطيوك فيديو ونتكفلو بجودة الخدمة.</div>
+    </div>
+  </section>
+
+  <section class="radio-map">
+    <h2>📻 راديو القرآن</h2>
+    <audio controls autoplay>
+      <source src="https://stream.radiojar.com/0tpy1u0kxtzuv" type="audio/mpeg">
+    </audio>
+    <h2>🗺️ موقع الورشة</h2>
+    <iframe src="https://maps.google.com/maps?q=Atelier%20Electronique%20Médenine&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="300" style="border:0;" allowfullscreen></iframe>
+  </section>
+
+  <footer class="footer">
+    <p>مدنين – نخدمو في كامل أنحاء تونس</p>
+    <p>من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
   </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
