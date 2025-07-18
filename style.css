@@ -1,70 +1,74 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Atelier Electronique Médenine</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/logo.png" type="image/png">
-  <script src="script.js" defer></script>
-</head>
-<body>
-  <header>
-    <img src="assets/logo.png" alt="Logo" class="logo">
-    <button id="lang-switch">Français</button>
-  </header>  <section class="top-bar">
-    <div class="clock" id="clock"></div>
-    <div class="visits" id="visits"></div>
-  </section>  <section class="news">
-    <marquee direction="right" scrollamount="5" id="news-marquee">
-      🔧 جديد الورشة: خدمة عن بُعد لجميع الولايات | عروض خاصة على التصليح هذا الأسبوع 🔧
-    </marquee>
-  </section>  <section class="cta-buttons">
-    <a href="https://wa.me/21698192103" target="_blank" class="cta-button">📞 واتساب</a>
-    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="cta-button">📍 خرائط Google</a>
-  </section>  <section class="qr-section">
-    <img src="assets/qr.png" alt="QR Code" class="qr-code">
-    <p>📱 امسح للوصول السريع</p>
-  </section>  <section class="gallery">
-    <h2>📷 صور من الورشة</h2>
-    <div class="media-grid">
-      <img src="media/1.webp" alt="صورة1">
-      <img src="media/2.webp" alt="صورة2">
-      <img src="media/3.webp" alt="صورة3">
-    </div>
-  </section>  <section class="videos">
-    <h2>🎥 فيديوهات التصليح</h2>
-    <div class="media-grid">
-      <video controls src="media/fix1.mp4"></video>
-      <video controls src="media/fix2.mp4"></video>
-    </div>
-  </section>  <section class="services">
-    <h2>🛠️ خدماتنا</h2>
-    <ul>
-      <li>تشخيص الأعطال بدقة</li>
-      <li>تصليح كروت إلكترونية</li>
-      <li>صيانة أجهزة منزلية</li>
-      <li>خدمة عن بُعد عبر البريد</li>
-    </ul>
-  </section>  <section class="radio">
-    <h2>📻 استمع للقرآن الكريم</h2>
-    <audio controls src="https://stream.radiojar.com/0tpy1kdtg0quv"></audio>
-  </section>  <section class="faq">
-    <h2>❓ الأسئلة الشائعة</h2>
-    <div class="faq-item">
-      <button class="faq-question">كيف نرسل الجهاز للورشة؟</button>
-      <div class="faq-answer">يمكنك إرساله عبر البريد السريع مع ذكر رقم الهاتف.</div>
-    </div>
-    <div class="faq-item">
-      <button class="faq-question">هل توجد ضمانات؟</button>
-      <div class="faq-answer">نعم، كل تصليح مضمون ويشمل تقرير وصور.</div>
-    </div>
-  </section>  <section class="map">
-    <h2>📍 موقع الورشة</h2>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-  </section>  <footer>
-    <p>مدنين – نخدمو في كامل أنحاء تونس</p>
-    <p>📆 من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
-  </footer>
-</body>
-</html>
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  background: #0f1822;
+  color: #eee;
+  direction: rtl;
+  text-align: center;
+}
+
+.hero {
+  background: radial-gradient(circle at center, #1e2a38, #0f1822);
+  padding: 2em;
+}
+
+.logo {
+  width: 100px;
+  border-radius: 20px;
+}
+
+.btn {
+  background: #00bfa6;
+  color: #fff;
+  padding: 0.7em 1.5em;
+  margin: 1em;
+  display: inline-block;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.info-bar, .news-bar {
+  background: #1e2a38;
+  padding: 0.5em;
+  margin-top: 0.5em;
+  font-size: 1em;
+}
+
+.gallery .grid, .videos .grid {
+  display: grid;
+  gap: 1em;
+  padding: 1em;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.gallery img, .videos video {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #000;
+}
+
+.faq {
+  padding: 1em;
+  background: #1a2633;
+}
+
+details {
+  margin-bottom: 0.7em;
+  background: #233143;
+  padding: 1em;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.radio iframe, .map iframe {
+  margin-top: 1em;
+  border-radius: 10px;
+}
+
+footer {
+  background: #121c28;
+  padding: 1em;
+  font-size: 0.9em;
+  border-top: 1px solid #333;
+}
