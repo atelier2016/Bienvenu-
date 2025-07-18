@@ -1,66 +1,57 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Atelier Electronique Médenine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🔧 Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="logo.png" type="image/png" />
+  <link rel="icon" href="images/logo.png" />
 </head>
 <body>
-  <header class="hero">
-    <img src="logo.png" alt="Logo" class="logo" />
-    <h1>ورشة إلكترونيك مدنين</h1>
-    <p>🔧 خبرة أكثر من 10 سنوات في تصليح الإلكترونيات</p>
+  <header>
+    <img src="images/logo.png" alt="Logo" class="logo" />
+    <button id="langToggle">🇫🇷</button>
   </header>
 
-  <section class="news-bar" id="news-bar">📢 جارٍ تحميل الأخبار...</section>
-
-  <section class="info-bar">
-    ⏰ <span id="clock"></span> | 👁️‍🗨️ <span id="visits">0</span> زيارة
-  </section>
+  <div class="news-ticker" id="news"></div>
+  <div class="time-visits">
+    <span id="clock"></span> | 👁️ عدد الزوار: <span id="visits"></span>
+  </div>
 
   <section class="cta">
-    <a href="https://wa.me/21698192103" class="btn">💬 راسلنا واتساب</a>
-    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" class="btn">📍 موقع الورشة</a>
+    <h1>ورشتك الإلكترونية تخدمك في كامل تراب الجمهورية!</h1>
+    <p>تصليح كروت إلكترونية، أجهزة كمبيوتر، ثلاجات إنفرتر وأكثر</p>
+    <a href="https://maps.app.goo.gl/nxBU8h2oFDEkiBFE9" target="_blank" class="btn map">📍 موقعنا على الخريطة</a>
+    <a href="https://wa.me/21698192103" class="btn whatsapp">📲 تواصل واتساب</a>
   </section>
 
-  <section class="gallery" id="gallery">
-    <h2>📸 صور من الورشة</h2>
-    <div class="grid">
-      <img src="images/1.jpg" alt="صورة 1" />
-      <img src="images/2.jpg" alt="صورة 2" />
-      <img src="images/3.jpg" alt="صورة 3" />
-    </div>
+  <section class="gallery-link">
+    <a href="photos.html" class="btn">📸 معرض الصور</a>
+    <a href="videos.html" class="btn">🎥 فيديوهات الورشة</a>
+    <a href="download.html" class="btn">📥 تحميل البرامج</a>
   </section>
 
-  <section class="videos">
-    <h2>🎥 فيديوهات الورشة</h2>
-    <div class="grid">
-      <video controls src="videos/1.mp4"></video>
-      <video controls src="videos/2.mp4"></video>
-    </div>
+  <section class="radio-section">
+    <h2>📻 استمع للقرآن الكريم</h2>
+    <iframe src="https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://stream.radiojar.com/0tpy1hyk8k8uv&l=1" frameborder="0" allow="autoplay" class="radio-player"></iframe>
   </section>
 
   <section class="faq">
-    <h2>❓الأسئلة الشائعة</h2>
-    <details><summary>كيف نبعت الجهاز؟</summary><p>تبعثه عبر البريد ونصلّحوه ونرجعوه ليك.</p></details>
-    <details><summary>كيف نعرف حالة التصليح؟</summary><p>نبعثولك صور وفيديوهات بالحالة.</p></details>
-  </section>
-
-  <section class="radio">
-    <h2>📻 راديو القرآن الكريم</h2>
-    <iframe src="https://www.internet-radio.com/servers/tools/playlistgenerator/?u=http://radio.mp3quran.net:9992/;&t=.m3u" width="100%" height="30" frameborder="0"></iframe>
-  </section>
-
-  <section class="map">
-    <h2>🗺️ موقعنا على Google Maps</h2>
-    <iframe src="https://maps.google.com/maps?q=Atelier%20Electronique%20M%C3%A9denine&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="300" frameborder="0" allowfullscreen></iframe>
+    <h2>❓ الأسئلة الشائعة</h2>
+    <div class="faq-item">
+      <button class="faq-question">كيف نرسل الجهاز للورشة؟</button>
+      <div class="faq-answer">تبعث الجهاز عبر البريد مع رقمك. بعد التشخيص نبعثولك الصور والتكلفة.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-question">هل نخدمو كل ولايات تونس؟</button>
+      <div class="faq-answer">نعم، نوصلو ونرجعو بالبريد لأي ولاية في الجمهورية.</div>
+    </div>
   </section>
 
   <footer>
-    <p>📍 مدنين – نخدمو في كامل أنحاء تونس</p>
-    <p>🕗 من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
+    <p>🔧 مدنين – نخدمو في كامل أنحاء تونس</p>
+    <p>🕒 من الإثنين للسبت، 08:00 - 18:00 | الأحد راحة</p>
   </footer>
 
   <script src="script.js"></script>
