@@ -1,89 +1,25 @@
-// script.js - نسخة نهائية AEM-site تصميم إيطالي
-document.addEventListener("DOMContentLoaded", function () {
-  // التاريخ والوقت
-  const timeEl = document.getElementById("time");
-  setInterval(() => {
-    const now = new Date();
-    timeEl.textContent = now.toLocaleString("fr-TN");
-  }, 1000);
+// ⏰ عرض الوقت
+function updateClock() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('ar-TN');
+  document.getElementById('clock').textContent = time;
+}
+setInterval(updateClock, 1000);
+updateClock();
 
-  // عدد الزوار localStorage
-  const visitsEl = document.getElementById("visits");
-  let visits = localStorage.getItem("visitsAEM");
-  visits = visits ? parseInt(visits) + 1 : 1;
-  localStorage.setItem("visitsAEM", visits);
-  visitsEl.textContent = visits;
+// 👁️‍🗨️ عدد الزيارات localStorage
+let visits = localStorage.getItem('aem-visits') || 0;
+visits++;
+localStorage.setItem('aem-visits', visits);
+document.getElementById('visits').textContent = visits;
 
-  // زر تغيير اللغة
-  const langBtn = document.getElementById("langToggle");
-  langBtn.addEventListener("click", toggleLanguage);
-
-  function toggleLanguage() {
-    document.body.classList.toggle("fr");
-    if (document.body.classList.contains("fr")) {
-      langBtn.textContent = "🇹🇳 العربية";
-    } else {
-      langBtn.textContent = "🇫🇷 Français";
-    }
-  }
-
-  // الراديو
-  const radio = document.getElementById("quranRadio");
-  const playBtn = document.getElementById("playRadio");
-  playBtn.addEventListener("click", () => {
-    if (radio.paused) {
-      radio.play();
-      playBtn.textContent = "⏸️ إيقاف الراديو";
-    } else {
-      radio.pause();
-      playBtn.textContent = "▶️ تشغيل الراديو";
-    }
+// 📰 شريط أخبار BBC
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/arabic/rss.xml")
+  .then(res => res.json())
+  .then(data => {
+    const news = data.items.map(item => `🗞️ ${item.title}`).join(" | ");
+    document.getElementById("news-bar").textContent = news;
+  })
+  .catch(() => {
+    document.getElementById("news-bar").textContent = "❌ فشل تحميل الأخبار";
   });
-
-  // تفعيل الأسئلة الشائعة
-  document.querySelectorAll(".faq-question").forEach((q) => {
-    q.addEventListener("click", () => {
-      q.classList.toggle("open");
-      const answer = q.nextElementSibling;
-      if (answer.style.maxHeight) {
-        answer.style.maxHeight = null;
-      } else {
-        answer.style.maxHeight = answer.scrollHeight + "px";
-      }
-    });
-  });
-
-  // تحميل شريط أخبار BBC
-  fetch("https://api.rss2json.com/v1/api.json?rss_url=https://feeds.bbci.co.uk/arabic/rss.xml")
-    .then((res) => res.json())
-    .then((data) => {
-      const newsContainer = document.getElementById("news");
-      newsContainer.innerHTML = "";
-      data.items.slice(0, 5).forEach((item) => {
-        const span = document.createElement("span");
-        span.textContent = "🗞️ " + item.title;
-        newsContainer.appendChild(span);
-      });
-    })
-    .catch(() => {
-      document.getElementById("news").textContent = "❌ لم يتم تحميل الأخبار";
-    });
-
-  // Lightbox للصور والفيديوهات
-  const lightbox = document.createElement("div");
-  lightbox.id = "lightbox";
-  document.body.appendChild(lightbox);
-
-  document.querySelectorAll(".gallery img, .video-preview").forEach((media) => {
-    media.addEventListener("click", () => {
-      lightbox.classList.add("active");
-      const clone = media.cloneNode(true);
-      lightbox.innerHTML = "";
-      lightbox.appendChild(clone);
-    });
-  });
-
-  lightbox.addEventListener("click", () => {
-    lightbox.classList.remove("active");
-  });
-});
