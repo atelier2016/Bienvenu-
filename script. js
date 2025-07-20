@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
 
-  // 🕒 عرض الوقت والتاريخ
+  // الوقت والتاريخ
   function updateTime() {
     const now = new Date();
     const daysAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
@@ -13,77 +13,66 @@ document.addEventListener('DOMContentLoaded', () => {
     let month = currentLang === 'ar' ? monthsAr[now.getMonth()] : monthsFr[now.getMonth()];
     let date = now.getDate();
     let timeStr = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
-    let dateStr = currentLang === 'ar' 
-      ? `${day}، ${date} ${month}` 
-      : `${day}, ${date} ${month}`;
-      
+    let dateStr = currentLang === 'ar' ? `${day}، ${date} ${month}` : `${day}, ${date} ${month}`;
+
     document.getElementById('current-time').textContent = `${dateStr} - ${timeStr}`;
   }
 
-  // 👁️ عداد الزيارات
+  // عداد الزيارات
   function updateVisits() {
     const key = 'aem-visit-count';
     let count = parseInt(localStorage.getItem(key)) || 0;
     count++;
     localStorage.setItem(key, count);
-    document.getElementById('visit-count').textContent = 
-      currentLang === 'ar' ? `عدد زياراتك: ${count}` : `Nombre de visites: ${count}`;
+    const text = currentLang === 'ar' ? `عدد زياراتك: ${count}` : `Nombre de visites: ${count}`;
+    document.getElementById('visit-count').textContent = text;
   }
 
-  // 🗞️ شريط الأخبار يتحرك تلقائيًا
+  // شريط الأخبار المتحرك
   const newsAr = [
     "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
-    "🔧 خدمات تصليح الأجهزة بجودة عالية وبأسعار منافسة.",
-    "🚚 توصيل عبر البريد متوفر لكل أنحاء تونس.",
+    "🔧 خدمات تصليح بجودة عالية وبأسعار منافسة.",
+    "🚚 توصيل عبر البريد متوفر في تونس.",
     "📱 تواصل معنا عبر واتساب لأي استفسار."
   ];
   const newsFr = [
-    "📢 Atelier Electronique Médenine est ouvert pour toutes les régions.",
-    "🔧 Réparation d'appareils électroniques avec haute qualité et bon prix.",
-    "🚚 Livraison disponible dans toute la Tunisie.",
+    "📢 Atelier Electronique Médenine est ouvert dans toute la Tunisie.",
+    "🔧 Réparation d'appareils de qualité à bon prix.",
+    "🚚 Livraison disponible dans tout le pays.",
     "📱 Contactez-nous sur WhatsApp pour toute demande."
   ];
 
   function rotateNews() {
-    const news = currentLang === 'ar' ? newsAr : newsFr;
     const ticker = document.getElementById('live-news');
+    const newsList = currentLang === 'ar' ? newsAr : newsFr;
     let index = 0;
-    ticker.textContent = news[index];
+    ticker.textContent = newsList[index];
     setInterval(() => {
-      index = (index + 1) % news.length;
-      ticker.textContent = news[index];
+      index = (index + 1) % newsList.length;
+      ticker.textContent = newsList[index];
     }, 5000);
   }
 
-  // ❓ الأسئلة المتكررة
+  // FAQ
   function initFAQ() {
     document.querySelectorAll('.faq-item').forEach(item => {
       item.onclick = () => item.classList.toggle('open');
     });
   }
 
-  // 🌍 تبديل اللغة
+  // تبديل اللغة
   document.getElementById('toggle-lang-btn').addEventListener('click', () => {
     currentLang = currentLang === 'ar' ? 'fr' : 'ar';
     document.documentElement.lang = currentLang;
     document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
-    // تحديث النصوص الديناميكية حسب اللغة
     document.querySelector('header h1').textContent = "Atelier Electronique Médenine";
-    document.querySelector('.experience-badge').textContent = 
+    document.querySelector('.experience-badge').textContent =
       currentLang === 'ar' ? "🌼 أكثر من 10 سنوات خبرة" : "🌼 Plus de 10 ans d'expérience";
-    document.getElementById('toggle-lang-btn').textContent = 
+    document.getElementById('toggle-lang-btn').textContent =
       currentLang === 'ar' ? "تبديل اللغة" : "Changer la langue";
 
-    document.getElementById('visit-count').textContent = 
-      currentLang === 'ar' ? `عدد زياراتك: ${localStorage.getItem('aem-visit-count')}` 
-                           : `Nombre de visites: ${localStorage.getItem('aem-visit-count')}`;
-
-    document.querySelector('.faq h2').textContent = 
-      currentLang === 'ar' ? "الأسئلة الشائعة" : "FAQ";
-
-    const faqItems = document.querySelectorAll('.faq-item');
-    const faqContent = currentLang === 'ar'
+    const faqData = currentLang === 'ar'
       ? [
           { q: "كيف يمكنني إرسال جهاز للإصلاح؟", a: "يمكنك إرسال الجهاز بالبريد أو التواصل معنا لترتيب استلامه." },
           { q: "كم مدة التصليح المعتادة؟", a: "تتراوح بين يوم إلى 3 أيام حسب نوع العطل." },
@@ -91,26 +80,27 @@ document.addEventListener('DOMContentLoaded', () => {
           { q: "كيف أتابع حالة جهازي؟", a: "نرسل لك تحديثات عبر الصور والفيديو مباشرة على واتساب." }
         ]
       : [
-          { q: "Comment envoyer mon appareil pour réparation ?", a: "Par poste ou en nous contactant pour la collecte." },
-          { q: "Quel est le délai habituel de réparation ?", a: "Entre 1 et 3 jours selon la panne." },
-          { q: "Utilisez-vous des pièces d'origine ?", a: "Oui, toutes les pièces sont d’origine ou de qualité équivalente." },
-          { q: "Comment suivre l’état de mon appareil ?", a: "On vous envoie photos et vidéos via WhatsApp." }
+          { q: "Comment envoyer un appareil ?", a: "Par poste ou nous contacter pour le ramassage." },
+          { q: "Quel est le délai de réparation ?", a: "Entre 1 et 3 jours selon la panne." },
+          { q: "Utilisez-vous des pièces d'origine ?", a: "Oui, pièces d’origine ou équivalentes de qualité." },
+          { q: "Comment suivre la réparation ?", a: "Photos & vidéos envoyées sur WhatsApp." }
         ];
 
-    faqItems.forEach((item, i) => {
+    document.querySelector('.faq h2').textContent = currentLang === 'ar' ? "الأسئلة الشائعة" : "FAQ";
+    document.querySelectorAll('.faq-item').forEach((item, i) => {
       item.classList.remove('open');
-      item.querySelector('h3').textContent = faqContent[i].q;
-      item.querySelector('.answer').textContent = faqContent[i].a;
+      item.querySelector('h3').textContent = faqData[i].q;
+      item.querySelector('.answer').textContent = faqData[i].a;
     });
 
+    updateVisits();
     updateTime();
     rotateNews();
   });
 
-  // ⏳ التحديثات الدورية
   updateTime();
-  rotateNews();
   updateVisits();
+  rotateNews();
   initFAQ();
   setInterval(updateTime, 1000);
 });
