@@ -6,7 +6,7 @@
   <title>Atelier Electronique Médenine</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* أضفت هنا ستايل لموجة الراديو (equalizer) لأن الكود يستعملها */
+    /* نضيف موجة صوتية للراديو */
     .equalizer {
       display: flex;
       justify-content: center;
@@ -15,56 +15,40 @@
       margin-top: 10px;
       gap: 3px;
     }
+
     .bar {
       width: 5px;
       height: 10px;
-      background: #007bff;
+      background: #007BFF;
       animation: pulse 1s infinite;
     }
+
     .bar:nth-child(2) { animation-delay: 0.2s; }
     .bar:nth-child(3) { animation-delay: 0.4s; }
     .bar:nth-child(4) { animation-delay: 0.6s; }
     .bar:nth-child(5) { animation-delay: 0.8s; }
+
     @keyframes pulse {
       0%, 100% { height: 10px; }
       50% { height: 30px; }
     }
+
     .equalizer.hidden {
       display: none;
     }
-    /* عدلنا زر الراديو ليتناسب مع التصميم */
-    #radio-btn {
-      background-color: #007bff;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      font-size: 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-      transition: background 0.3s ease;
-      margin-top: 10px;
-    }
-    #radio-btn:hover {
-      background-color: #0056b3;
-    }
-    /* تعديل لمكان الأخبار المتحركة */
-    .news-ticker {
-      background-color: #222;
-      color: white;
+
+    /* FAQ open */
+    .faq-item .answer {
+      display: none;
+      margin-top: 5px;
+      background: #f9f9f9;
       padding: 10px;
-      font-size: 1rem;
-      white-space: nowrap;
-      overflow: hidden;
-      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
-    #live-news {
-      display: inline-block;
-      animation: ticker 30s linear infinite;
-    }
-    @keyframes ticker {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
+
+    .faq-item.open .answer {
+      display: block;
     }
   </style>
 </head>
@@ -77,7 +61,7 @@
   </header>
 
   <div class="news-ticker">
-    <div id="live-news">🔄 تحميل الأخبار...</div>
+    <div class="news-text" id="live-news">تحميل الأخبار...</div>
   </div>
 
   <main class="container main-content">
@@ -95,8 +79,8 @@
       <a href="photos.html" class="btn-gallery">شاهد الصور</a>
       <a href="videos.html" class="btn-video">شاهد الفيديو</a>
       <a href="services.html" class="btn-services">خدمات الورشة</a>
+      <button id="radio-btn" class="btn-radio">شغّل الراديو</button>
 
-      <button id="radio-btn" aria-label="تشغيل أو إيقاف الراديو">🎧 إستمع للراديو</button>
       <div class="equalizer hidden" id="equalizer" aria-hidden="true">
         <div class="bar"></div>
         <div class="bar"></div>
@@ -104,6 +88,8 @@
         <div class="bar"></div>
         <div class="bar"></div>
       </div>
+
+      <audio id="radio-stream" src="https://stream-51.zeno.fm/2b75b60fqrhvv?zs=RxGAeKBoRuKCqT5dzZoCaw" preload="none"></audio>
     </section>
 
     <section class="experience-badge">🌼 أكثر من 10 سنوات خبرة</section>
@@ -142,34 +128,43 @@
   </footer>
 
   <script>
-    // عناصر الراديو والأخبار
-    const radio = new Audio("https://stream-51.zeno.fm/2b75b60fqrhvv?zs=RxGAeKBoRuKCqT5dzZoCaw");
-    const equalizer = document.getElementById("equalizer");
-    const radioBtn = document.getElementById("radio-btn");
+  document.addEventListener('DOMContentLoaded', () => {
+    let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
 
-    function playRadio() {
-      radio.play().then(() => {
-        equalizer.classList.remove("hidden");
-        radioBtn.textContent = "⏸️ إيقاف الراديو";
-      }).catch(() => {
-        radioBtn.textContent = "🎧 إستمع للراديو";
-      });
+    // 🕒 تحديث الوقت والتاريخ
+    function updateTime() {
+      const now = new Date();
+      const daysAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+      const monthsAr = ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+      const daysFr = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+      const monthsFr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+
+      let day = currentLang === 'ar' ? daysAr[now.getDay()] : daysFr[now.getDay()];
+      let month = currentLang === 'ar' ? monthsAr[now.getMonth()] : monthsFr[now.getMonth()];
+      const date = now.getDate();
+      const hours = now.getHours().toString().padStart(2,'0');
+      const minutes = now.getMinutes().toString().padStart(2,'0');
+      const seconds = now.getSeconds().toString().padStart(2,'0');
+
+      const timeStr = `${hours}:${minutes}:${seconds}`;
+      const dateStr = currentLang === 'ar' 
+        ? `${day}، ${date} ${month}` 
+        : `${day}, ${date} ${month}`;
+
+      document.getElementById('current-time').textContent = `${dateStr} - ${timeStr}`;
     }
 
-    radioBtn.addEventListener("click", function () {
-      if (!radio.paused) {
-        radio.pause();
-        equalizer.classList.add("hidden");
-        this.textContent = "🎧 إستمع للراديو";
-      } else {
-        playRadio();
-      }
-    });
+    // 🧮 تحديث عداد الزيارات
+    function updateVisits() {
+      const key = 'aem-visit-count';
+      let count = parseInt(localStorage.getItem(key)) || 0;
+      count++;
+      localStorage.setItem(key, count);
+      document.getElementById('visit-count').textContent = 
+        currentLang === 'ar' ? `عدد زياراتك: ${count}` : `Nombre de visites: ${count}`;
+    }
 
-    window.addEventListener("load", () => {
-      playRadio();
-    });
-
+    // 📰 جلب الأخبار من الجزيرة مباشر
     async function fetchNews() {
       try {
         const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.aljazeera.net/aljazeerarss');
@@ -182,37 +177,93 @@
       }
     }
 
-    fetchNews();
-    setInterval(fetchNews, 600000); // كل 10 دقائق
-
-    // الوقت الحالي
-    function updateTime() {
-      const now = new Date();
-      const timeString = now.toLocaleTimeString('ar-TN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      document.getElementById("current-time").textContent = "⏰ " + timeString;
+    // ❓ تفعيل فتح/غلق الأسئلة
+    function initFAQ() {
+      const items = document.querySelectorAll('.faq-item');
+      items.forEach(item => {
+        item.onclick = () => {
+          item.classList.toggle('open');
+        };
+      });
     }
 
-    setInterval(updateTime, 1000);
-    updateTime();
+    // 🌐 تبديل اللغة
+    function toggleLanguage() {
+      const radio = document.getElementById('radio-stream');
+      currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
-    // FAQ
-    document.querySelectorAll(".faq-item").forEach(item => {
-      item.addEventListener("click", () => item.classList.toggle("open"));
-    });
+      document.querySelector('header h1').textContent = 'Atelier Electronique Médenine';
+      document.querySelector('.experience-badge').textContent = 
+        currentLang === 'ar' ? '🌼 أكثر من 10 سنوات خبرة' : '🌼 Plus de 10 ans d\'expérience';
+      document.getElementById('toggle-lang-btn').textContent = 
+        currentLang === 'ar' ? 'تبديل اللغة' : 'Changer la langue';
 
-    // تغيير اللغة
-    document.getElementById("toggle-lang-btn").addEventListener("click", function () {
-      const lang = document.documentElement.lang;
-      if (lang === "ar") {
-        document.documentElement.lang = "fr";
-        document.documentElement.dir = "ltr";
-        this.textContent = "🇸🇦 العربية";
+      document.querySelector('.btn-whatsapp').textContent = currentLang === 'ar' ? 'واتساب' : 'WhatsApp';
+      document.querySelector('.btn-maps').textContent = currentLang === 'ar' ? 'موقعنا على Google Maps' : 'Voir sur Google Maps';
+      document.querySelector('.btn-gallery').textContent = currentLang === 'ar' ? 'شاهد الصور' : 'Voir les photos';
+      document.querySelector('.btn-video').textContent = currentLang === 'ar' ? 'شاهد الفيديو' : 'Voir les vidéos';
+      document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خدمات الورشة' : 'Services de l\'atelier';
+      document.getElementById('radio-btn').textContent = 
+        currentLang === 'ar' ? (radio.paused ? 'شغّل الراديو' : 'أوقف الراديو') : (radio.paused ? 'Écouter la radio' : 'Arrêter la radio');
+
+      // إعادة بناء الـ FAQ
+      const faqContainer = document.querySelector('.faq');
+      faqContainer.innerHTML = currentLang === 'ar' ? `
+        <h2>الأسئلة الشائعة</h2>
+        <div class="faq-item"><h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3><div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div></div>
+        <div class="faq-item"><h3>ما هي مدة التصليح المعتادة؟</h3><div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div></div>
+        <div class="faq-item"><h3>هل توفرون قطع غيار أصلية؟</h3><div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div></div>
+        <div class="faq-item"><h3>كيف أتابع حالة الإصلاح؟</h3><div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div></div>
+      ` : `
+        <h2>FAQ</h2>
+        <div class="faq-item"><h3>Comment puis-je envoyer un appareil pour réparation ?</h3><div class="answer">Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte.</div></div>
+        <div class="faq-item"><h3>Quel est le délai moyen de réparation ?</h3><div class="answer">Le délai dépend du type de panne, mais généralement pas plus de 3 jours ouvrables.</div></div>
+        <div class="faq-item"><h3>Fournissez-vous des pièces d'origine ?</h3><div class="answer">Oui, nous fournissons des pièces d'origine et de haute qualité pour tous les appareils.</div></div>
+        <div class="faq-item"><h3>Comment suivre l'état de la réparation ?</h3><div class="answer">Nous envoyons des photos et vidéos de l'état de l'appareil pendant la réparation via WhatsApp.</div></div>
+      `;
+
+      updateTime();
+      updateVisits();
+      fetchNews();
+      initFAQ();
+      toggleEqualizer(radio.paused === false);
+    }
+
+    // 🔊 الراديو مع الموجة الصوتية
+    const radio = document.getElementById('radio-stream');
+    const radioBtn = document.getElementById('radio-btn');
+    const equalizer = document.getElementById('equalizer');
+
+    function toggleEqualizer(isPlaying) {
+      if(isPlaying) equalizer.classList.remove('hidden');
+      else equalizer.classList.add('hidden');
+    }
+
+    radioBtn.addEventListener('click', () => {
+      if(radio.paused){
+        radio.play();
+        radioBtn.textContent = currentLang === 'ar' ? 'أوقف الراديو' : 'Arrêter la radio';
+        toggleEqualizer(true);
       } else {
-        document.documentElement.lang = "ar";
-        document.documentElement.dir = "rtl";
-        this.textContent = "🇫🇷 Français";
+        radio.pause();
+        radioBtn.textContent = currentLang === 'ar' ? 'شغّل الراديو' : 'Écouter la radio';
+        toggleEqualizer(false);
       }
     });
+
+    // ⏱️ تحديثات تلقائية
+    document.getElementById('toggle-lang-btn').addEventListener('click', toggleLanguage);
+    setInterval(updateTime, 1000);
+    setInterval(fetchNews, 10 * 60 * 1000); // كل 10 دقائق
+
+    // عند تحميل الصفحة
+    updateTime();
+    updateVisits();
+    fetchNews();
+    initFAQ();
+  });
   </script>
 </body>
 </html>
