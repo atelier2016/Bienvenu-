@@ -200,7 +200,18 @@
       initFAQ();
     }
 
- 
+    // تشغيل وإيقاف الراديو
+    const radio = document.getElementById('radio-stream');
+    const radioBtn = document.getElementById('radio-btn');
+    radioBtn.addEventListener('click', () => {
+      if(radio.paused){
+        radio.play();
+        radioBtn.textContent = currentLang === 'ar' ? 'أوقف الراديو' : 'Arrêter la radio';
+      } else {
+        radio.pause();
+        radioBtn.textContent = currentLang === 'ar' ? 'شغّل الراديو' : 'Écouter la radio';
+      }
+    });
 
     // زر تبديل اللغة
     document.getElementById('toggle-lang-btn').addEventListener('click', toggleLanguage);
