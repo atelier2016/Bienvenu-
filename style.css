@@ -50,24 +50,28 @@ header h1 {
   flex-grow: 1;
 }
 
-#news-ticker {
-  background-color: #0a1e3d;
-  color: #1e90ff;
-  padding: 12px 18px;
-  font-weight: bold;
-  font-size: 16px;
-  text-align: center;
+/* News ticker */
+.news-ticker {
+  background: #ff6b35;
+  color: white;
   overflow: hidden;
-  border-radius: 8px;
-  margin-top: 10px;
   white-space: nowrap;
-  animation: scroll-left 15s linear infinite;
-  box-shadow: 0 0 10px rgba(30, 144, 255, 0.5);
+  font-weight: 700;
+  padding: 10px 0;
+  margin-bottom: 25px;
+  position: relative;
+  font-size: 1rem;
+}
+
+.news-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 25s linear infinite;
 }
 
 @keyframes scroll-left {
   0% {
-    transform: translateX(100%);
+    transform: translateX(0%);
   }
   100% {
     transform: translateX(-100%);
@@ -106,26 +110,6 @@ header h1 {
 }
 
 /* CTA Buttons */
-#radio-btn {
-  background-color: #1e90ff;
-  color: white;
-  border: none;
-  padding: 14px 24px;
-  border-radius: 10px;
-  font-size: 17px;
-  cursor: pointer;
-  box-shadow: 0 0 12px rgba(30, 144, 255, 0.5);
-  margin: 20px auto;
-  display: block;
-  transition: all 0.3s ease-in-out;
-  font-weight: 700;
-}
-
-#radio-btn:hover {
-  background-color: #0c5ea8;
-  box-shadow: 0 0 16px rgba(12, 94, 168, 0.7);
-}
-
 .cta-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -156,10 +140,10 @@ header h1 {
   box-shadow: 0 4px 12px rgba(12, 94, 168, 0.9);
 }
 
-/* زر المتجر */
+/* ✅ زر المتجر (تم تعديل لتحديد أكثر وأهمية !important) */
 .cta-buttons .btn-store {
-  background: #ffc107 !important;
-  color: #000 !important;
+  background: #ffc107 !important; /* أصفر */
+  color: #000 !important;          /* أسود */
   padding: 14px 25px;
   border-radius: 8px;
   font-weight: 800;
@@ -319,21 +303,17 @@ footer {
     text-align: center;
     gap: 10px;
   }
-
   .info-bar {
     flex-direction: column;
     gap: 10px;
   }
-
   .cta-buttons {
     flex-direction: column;
     align-items: center;
   }
-
   .experience-badge {
     width: 90%;
   }
-
   .faq {
     width: 90%;
   }
