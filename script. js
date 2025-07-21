@@ -41,25 +41,22 @@ document.addEventListener('DOMContentLoaded', () => {
       currentLang === 'ar' ? `عدد زياراتك: ${count}` : `Nombre de visites: ${count}`;
   }
 
-  // تحديث شريط الأخبار (ثابت للنصوص)
-  function updateNews() {
-    const newsAr = [
-      "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
-      "🔧 خدمات تصليح الأجهزة الإلكترونية بجودة عالية وبأسعار منافسة.",
-      "🌍 التوصيل عبر البريد متوفر لكل أنحاء تونس.",
-      "📱 تواصل معنا عبر واتساب لأي استفسار."
-    ];
-    const newsFr = [
-      "📢 Atelier Electronique Médenine ouvre ses portes pour toutes les régions.",
-      "🔧 Services de réparation électronique de haute qualité à prix compétitifs.",
-      "🌍 Livraison par courrier disponible dans toute la Tunisie.",
-      "📱 Contactez-nous via WhatsApp pour toute question."
-    ];
-
-    const news = currentLang === 'ar' ? newsAr : newsFr;
-    const ticker = document.getElementById('live-news');
-    ticker.textContent = news.join(' • ');
+  <script>
+  async function fetchNews() {
+    try {
+      const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.bbc.co.uk/arabic/index.xml');
+      const data = await response.json();
+      const articles = data.items.slice(0, 5);
+      const newsText = articles.map(item => item.title).join(" 🔸 ");
+      document.getElementById('news-ticker').textContent = newsText;
+    } catch (error) {
+      document.getElementById('news-ticker').textContent = "⚠️ فشل تحميل الأخبار";
+    }
   }
+
+  fetchNews(); // أول تحميل
+  setInterval(fetchNews, 10 * 60 * 1000); // كل 10 دقايق
+</script>
 
   // تفعيل فتح وإغلاق الأسئلة FAQ
   function initFAQ() {
