@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
 
-  // تحديث الوقت والتاريخ
+  // 🕒 تحديث الوقت والتاريخ
   function updateTime() {
     const now = new Date();
     const daysAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
@@ -9,15 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const daysFr = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
     const monthsFr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 
-    let day, month;
-    if(currentLang === 'ar'){
-      day = daysAr[now.getDay()];
-      month = monthsAr[now.getMonth()];
-    } else {
-      day = daysFr[now.getDay()];
-      month = monthsFr[now.getMonth()];
-    }
-
+    let day = currentLang === 'ar' ? daysAr[now.getDay()] : daysFr[now.getDay()];
+    let month = currentLang === 'ar' ? monthsAr[now.getMonth()] : monthsFr[now.getMonth()];
     const date = now.getDate();
     const hours = now.getHours().toString().padStart(2,'0');
     const minutes = now.getMinutes().toString().padStart(2,'0');
@@ -31,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-time').textContent = `${dateStr} - ${timeStr}`;
   }
 
-  // تحديث عداد الزيارات (localStorage)
+  // 🧮 تحديث عداد الزيارات
   function updateVisits() {
     const key = 'aem-visit-count';
     let count = parseInt(localStorage.getItem(key)) || 0;
@@ -41,24 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
       currentLang === 'ar' ? `عدد زياراتك: ${count}` : `Nombre de visites: ${count}`;
   }
 
-  <script>
+  // 📰 جلب الأخبار من BBC Arabic
   async function fetchNews() {
     try {
       const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.bbc.co.uk/arabic/index.xml');
       const data = await response.json();
       const articles = data.items.slice(0, 5);
       const newsText = articles.map(item => item.title).join(" 🔸 ");
-      document.getElementById('news-ticker').textContent = newsText;
+      document.getElementById('live-news').textContent = newsText;
     } catch (error) {
-      document.getElementById('news-ticker').textContent = "⚠️ فشل تحميل الأخبار";
+      document.getElementById('live-news').textContent = "⚠️ فشل تحميل الأخبار";
     }
   }
 
-  fetchNews(); // أول تحميل
-  setInterval(fetchNews, 10 * 60 * 1000); // كل 10 دقايق
-</script>
-
-  // تفعيل فتح وإغلاق الأسئلة FAQ
+  // ❓ تفعيل فتح/غلق الأسئلة
   function initFAQ() {
     const items = document.querySelectorAll('.faq-item');
     items.forEach(item => {
@@ -68,64 +57,50 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // تبديل اللغة مع تحديث النصوص
+  // 🌐 تبديل اللغة
   function toggleLanguage() {
     const radio = document.getElementById('radio-stream');
-    if(currentLang === 'ar'){
-      document.documentElement.lang = 'fr';
-      document.documentElement.dir = 'ltr';
-      currentLang = 'fr';
+    currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
 
-      document.querySelector('header h1').textContent = 'Atelier Electronique Médenine';
-      document.querySelector('.experience-badge').textContent = '🌼 Plus de 10 ans d\'expérience';
-      document.getElementById('toggle-lang-btn').textContent = 'Changer la langue';
-      document.querySelector('.btn-whatsapp').textContent = 'WhatsApp';
-      document.querySelector('.btn-maps').textContent = 'Voir sur Google Maps';
-      document.querySelector('.btn-gallery').textContent = 'Voir les photos';
-      document.querySelector('.btn-video').textContent = 'Voir les vidéos';
-document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خدمات الورشة' : 'Services de l\'atelier';
-      document.getElementById('radio-btn').textContent = radio.paused ? 'Écouter la radio' : 'Arrêter la radio';
+    document.querySelector('header h1').textContent = 'Atelier Electronique Médenine';
+    document.querySelector('.experience-badge').textContent = 
+      currentLang === 'ar' ? '🌼 أكثر من 10 سنوات خبرة' : '🌼 Plus de 10 ans d\'expérience';
+    document.getElementById('toggle-lang-btn').textContent = 
+      currentLang === 'ar' ? 'تبديل اللغة' : 'Changer la langue';
 
-      // FAQ - محتوى فرنسي
-      const faqContainer = document.querySelector('.faq');
-      faqContainer.innerHTML = `
-        <h2>FAQ</h2>
-        <div class="faq-item"><h3>Comment puis-je envoyer un appareil pour réparation ?</h3><div class="answer">Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte.</div></div>
-        <div class="faq-item"><h3>Quel est le délai moyen de réparation ?</h3><div class="answer">Le délai dépend du type de panne, mais généralement pas plus de 3 jours ouvrables.</div></div>
-        <div class="faq-item"><h3>Fournissez-vous des pièces d'origine ?</h3><div class="answer">Oui, nous fournissons des pièces d'origine et de haute qualité pour tous les appareils.</div></div>
-        <div class="faq-item"><h3>Comment suivre l'état de la réparation ?</h3><div class="answer">Nous envoyons des photos et vidéos de l'état de l'appareil pendant la réparation via WhatsApp.</div></div>
-      `;
-    } else {
-      document.documentElement.lang = 'ar';
-      document.documentElement.dir = 'rtl';
-      currentLang = 'ar';
+    document.querySelector('.btn-whatsapp').textContent = currentLang === 'ar' ? 'واتساب' : 'WhatsApp';
+    document.querySelector('.btn-maps').textContent = currentLang === 'ar' ? 'موقعنا على Google Maps' : 'Voir sur Google Maps';
+    document.querySelector('.btn-gallery').textContent = currentLang === 'ar' ? 'شاهد الصور' : 'Voir les photos';
+    document.querySelector('.btn-video').textContent = currentLang === 'ar' ? 'شاهد الفيديو' : 'Voir les vidéos';
+    document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خدمات الورشة' : 'Services de l\'atelier';
+    document.getElementById('radio-btn').textContent = 
+      currentLang === 'ar' ? (radio.paused ? 'شغّل الراديو' : 'أوقف الراديو') : (radio.paused ? 'Écouter la radio' : 'Arrêter la radio');
 
-      document.querySelector('header h1').textContent = 'Atelier Electronique Médenine';
-      document.querySelector('.experience-badge').textContent = '🌼 أكثر من 10 سنوات خبرة';
-      document.getElementById('toggle-lang-btn').textContent = 'تبديل اللغة';
-      document.querySelector('.btn-whatsapp').textContent = 'واتساب';
-      document.querySelector('.btn-maps').textContent = 'موقعنا على Google Maps';
-      document.querySelector('.btn-gallery').textContent = 'شاهد الصور';
-      document.querySelector('.btn-video').textContent = 'شاهد الفيديو';
-      document.getElementById('radio-btn').textContent = radio.paused ? 'شغّل الراديو' : 'أوقف الراديو';
+    // إعادة بناء الـ FAQ
+    const faqContainer = document.querySelector('.faq');
+    faqContainer.innerHTML = currentLang === 'ar' ? `
+      <h2>الأسئلة الشائعة</h2>
+      <div class="faq-item"><h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3><div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div></div>
+      <div class="faq-item"><h3>ما هي مدة التصليح المعتادة؟</h3><div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div></div>
+      <div class="faq-item"><h3>هل توفرون قطع غيار أصلية؟</h3><div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div></div>
+      <div class="faq-item"><h3>كيف أتابع حالة الإصلاح؟</h3><div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div></div>
+    ` : `
+      <h2>FAQ</h2>
+      <div class="faq-item"><h3>Comment puis-je envoyer un appareil pour réparation ?</h3><div class="answer">Vous pouvez envoyer l'appareil par courrier à l'atelier ou nous contacter pour organiser la collecte.</div></div>
+      <div class="faq-item"><h3>Quel est le délai moyen de réparation ?</h3><div class="answer">Le délai dépend du type de panne, mais généralement pas plus de 3 jours ouvrables.</div></div>
+      <div class="faq-item"><h3>Fournissez-vous des pièces d'origine ?</h3><div class="answer">Oui, nous fournissons des pièces d'origine et de haute qualité pour tous les appareils.</div></div>
+      <div class="faq-item"><h3>Comment suivre l'état de la réparation ?</h3><div class="answer">Nous envoyons des photos et vidéos de l'état de l'appareil pendant la réparation via WhatsApp.</div></div>
+    `;
 
-      // FAQ - محتوى عربي
-      const faqContainer = document.querySelector('.faq');
-      faqContainer.innerHTML = `
-        <h2>الأسئلة الشائعة</h2>
-        <div class="faq-item"><h3>كيف يمكنني إرسال جهاز للإصلاح؟</h3><div class="answer">يمكنك إرسال الجهاز عبر البريد إلى عنوان الورشة أو التواصل معنا لترتيب خدمة الاستلام.</div></div>
-        <div class="faq-item"><h3>ما هي مدة التصليح المعتادة؟</h3><div class="answer">مدة التصليح تختلف حسب نوع العطل، لكن غالباً لا تتجاوز 3 أيام عمل.</div></div>
-        <div class="faq-item"><h3>هل توفرون قطع غيار أصلية؟</h3><div class="answer">نعم، نوفر قطع غيار أصلية وذات جودة عالية لجميع الأجهزة.</div></div>
-        <div class="faq-item"><h3>كيف أتابع حالة الإصلاح؟</h3><div class="answer">نقوم بإرسال صور وفيديوهات لحالة الجهاز أثناء مراحل التصليح عبر واتساب.</div></div>
-      `;
-    }
-    updateNews();
     updateTime();
     updateVisits();
+    fetchNews();
     initFAQ();
   }
 
-  // تشغيل وإيقاف الراديو
+  // 🔊 الراديو
   const radio = document.getElementById('radio-stream');
   const radioBtn = document.getElementById('radio-btn');
   radioBtn.addEventListener('click', () => {
@@ -138,40 +113,14 @@ document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خ
     }
   });
 
-  // زر تبديل اللغة
+  // ⏱️ تحديثات تلقائية
   document.getElementById('toggle-lang-btn').addEventListener('click', toggleLanguage);
-
-  // التحديث الدوري للوقت (كل ثانية)
   setInterval(updateTime, 1000);
+  setInterval(fetchNews, 10 * 60 * 1000); // كل 10 دقائق
 
   // عند تحميل الصفحة
   updateTime();
   updateVisits();
-  updateNews();
+  fetchNews();
   initFAQ();
 });
-function openModal(src) {
-  const modal = document.getElementById('video-modal');
-  const modalVideo = document.getElementById('modal-video');
-  modal.style.display = 'flex';
-  modalVideo.src = src;
-  modalVideo.play();
-
-  modalVideo.onended = () => {
-    closeModal();
-  };
-
-  // إغلاق عند الضغط خارج الفيديو
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-}
-
-function closeModal() {
-  const modal = document.getElementById('video-modal');
-  const modalVideo = document.getElementById('modal-video');
-  modal.style.display = 'none';
-  modalVideo.pause();
-  modalVideo.currentTime = 0;
-  modalVideo.src = "";
-}
