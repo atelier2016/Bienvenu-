@@ -1,106 +1,112 @@
 document.addEventListener('DOMContentLoaded', () => {
-  let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
+  let currentLang = localStorage.getItem('preferredLang') || document.documentElement.lang;
 
-  // الوقت والتاريخ
+  const langData = {
+    ar: {
+      exp: "🌼 أكثر من 10 سنوات خبرة",
+      faqTitle: "الأسئلة الشائعة",
+      visits: "عدد زياراتك: ",
+      toggleBtn: "تبديل اللغة",
+      news: [
+        "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
+        "🔧 خدمات تصليح بجودة عالية وبأسعار منافسة.",
+        "🚚 توصيل عبر البريد متوفر في تونس.",
+        "📱 تواصل معنا عبر واتساب لأي استفسار."
+      ],
+      faq: [
+        { q: "كيف يمكنني إرسال جهاز للإصلاح؟", a: "يمكنك إرسال الجهاز بالبريد أو التواصل معنا لترتيب استلامه." },
+        { q: "كم مدة التصليح المعتادة؟", a: "تتراوح بين يوم إلى 3 أيام حسب نوع العطل." },
+        { q: "هل تستخدمون قطع غيار أصلية؟", a: "نعم، جميع القطع أصلية أو مكافئة عالية الجودة." },
+        { q: "كيف أتابع حالة جهازي؟", a: "نرسل لك تحديثات عبر الصور والفيديو مباشرة على واتساب." }
+      ],
+      days: ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],
+      months: ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر']
+    },
+    fr: {
+      exp: "🌼 Plus de 10 ans d'expérience",
+      faqTitle: "FAQ",
+      visits: "Nombre de visites: ",
+      toggleBtn: "Changer la langue",
+      news: [
+        "📢 Atelier Electronique Médenine est ouvert dans toute la Tunisie.",
+        "🔧 Réparation d'appareils de qualité à bon prix.",
+        "🚚 Livraison disponible dans tout le pays.",
+        "📱 Contactez-nous sur WhatsApp pour toute demande."
+      ],
+      faq: [
+        { q: "Comment envoyer un appareil ?", a: "Par poste ou nous contacter pour le ramassage." },
+        { q: "Quel est le délai de réparation ?", a: "Entre 1 et 3 jours selon la panne." },
+        { q: "Utilisez-vous des pièces d'origine ?", a: "Oui, pièces d’origine ou équivalentes de qualité." },
+        { q: "Comment suivre la réparation ?", a: "Photos & vidéos envoyées sur WhatsApp." }
+      ],
+      days: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+      months: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre']
+    }
+  };
+
+  function applyLanguage(lang) {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    localStorage.setItem('preferredLang', lang);
+
+    document.getElementById('toggle-lang-btn').textContent = langData[lang].toggleBtn;
+    document.getElementById('exp-badge').textContent = langData[lang].exp;
+    document.getElementById('faq-title').textContent = langData[lang].faqTitle;
+
+    const faqContainer = document.querySelector('.faq');
+    const faqItems = faqContainer.querySelectorAll('.faq-item');
+    if (faqItems.length > 0) faqItems.forEach(item => item.remove());
+
+    langData[lang].faq.forEach(({ q, a }) => {
+      const div = document.createElement('div');
+      div.className = 'faq-item';
+      div.innerHTML = `<h3>${q}</h3><div class="answer">${a}</div>`;
+      div.onclick = () => div.classList.toggle('open');
+      faqContainer.appendChild(div);
+    });
+
+    updateVisits();
+    rotateNews();
+  }
+
   function updateTime() {
     const now = new Date();
-    const daysAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-    const monthsAr = ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-    const daysFr = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-    const monthsFr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
-
-    let day = currentLang === 'ar' ? daysAr[now.getDay()] : daysFr[now.getDay()];
-    let month = currentLang === 'ar' ? monthsAr[now.getMonth()] : monthsFr[now.getMonth()];
-    let date = now.getDate();
-    let timeStr = `${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
-    let dateStr = currentLang === 'ar' ? `${day}، ${date} ${month}` : `${day}, ${date} ${month}`;
-
+    const lang = currentLang;
+    const day = langData[lang].days[now.getDay()];
+    const month = langData[lang].months[now.getMonth()];
+    const dateStr = `${day}، ${now.getDate()} ${month}`;
+    const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
     document.getElementById('current-time').textContent = `${dateStr} - ${timeStr}`;
   }
 
-  // عداد الزيارات
   function updateVisits() {
     const key = 'aem-visit-count';
     let count = parseInt(localStorage.getItem(key)) || 0;
     count++;
     localStorage.setItem(key, count);
-    const text = currentLang === 'ar' ? `عدد زياراتك: ${count}` : `Nombre de visites: ${count}`;
-    document.getElementById('visit-count').textContent = text;
+    document.getElementById('visit-count').textContent = langData[currentLang].visits + count;
   }
-
-  // شريط الأخبار المتحرك
-  const newsAr = [
-    "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
-    "🔧 خدمات تصليح بجودة عالية وبأسعار منافسة.",
-    "🚚 توصيل عبر البريد متوفر في تونس.",
-    "📱 تواصل معنا عبر واتساب لأي استفسار."
-  ];
-  const newsFr = [
-    "📢 Atelier Electronique Médenine est ouvert dans toute la Tunisie.",
-    "🔧 Réparation d'appareils de qualité à bon prix.",
-    "🚚 Livraison disponible dans tout le pays.",
-    "📱 Contactez-nous sur WhatsApp pour toute demande."
-  ];
 
   function rotateNews() {
     const ticker = document.getElementById('live-news');
-    const newsList = currentLang === 'ar' ? newsAr : newsFr;
-    let index = 0;
-    ticker.textContent = newsList[index];
+    const news = langData[currentLang].news;
+    let index = [43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/KqSMea8/projectnutric/tree/d9969bc5a581652861ec7fc95852f1bcdbf59536/nutric-client%2Fnode_modules_bak%2Fplotly.js%2Flib%2Flocales%2Far-dz.js?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "1")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/tsungkar/test1/tree/a433c299f462bdf460bd7eefc4c33e21c8fae33d/courses%2Frh358%2Frhel8.1%2Fmaterials%2Fdocs%2Fmanaging_storage_devices%2Fjs__vGeEtorfXGI3aPAp71YA74N5p8wfpYVhnoIqwaJrOiQ__veGxEiPQW6fkzAPZnAFA23SFz1CyJy2dlu6x8XuHM4s__7oVp6UW_380R7g-dHXPK35SfMqy4yUfhIx8G4wh5Zdk.js?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "2")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/hadar9/ArtistsFilters/tree/734df7ed19075bffab047d0556a0fcf0ba62b77b/client%2Fsrc%2Fcomponents%2Fheader%2Ftimeanddate%2FTimeNDate.js?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "3")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/YerkoPalma/hypercore-playground/tree/541c7c594fd0e0bf8b9d11c1807a45e6cd65fc84/hyperswarm%2Ffancy%2Findex.js?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "4")[43dcd9a7-70db-4a1f-b0ae-981daa162054](https://github.com/johnsibly/asteroid-party/tree/61647587e107829edd779f5c9fcabe2694e3f059/public%2Findex.js?citationMarker=43dcd9a7-70db-4a1f-b0ae-981daa162054 "5")
+let index = 0;
+    ticker.textContent = news[index];
     setInterval(() => {
-      index = (index + 1) % newsList.length;
-      ticker.textContent = newsList[index];
+      index = (index + 1) % news.length;
+      ticker.textContent = news[index];
     }, 5000);
   }
 
-  // FAQ
-  function initFAQ() {
-    document.querySelectorAll('.faq-item').forEach(item => {
-      item.onclick = () => item.classList.toggle('open');
-    });
-  }
-
-  // تبديل اللغة
+  // زر تبديل اللغة
   document.getElementById('toggle-lang-btn').addEventListener('click', () => {
     currentLang = currentLang === 'ar' ? 'fr' : 'ar';
-    document.documentElement.lang = currentLang;
-    document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-
-    document.querySelector('header h1').textContent = "Atelier Electronique Médenine";
-    document.querySelector('.experience-badge').textContent =
-      currentLang === 'ar' ? "🌼 أكثر من 10 سنوات خبرة" : "🌼 Plus de 10 ans d'expérience";
-    document.getElementById('toggle-lang-btn').textContent =
-      currentLang === 'ar' ? "تبديل اللغة" : "Changer la langue";
-
-    const faqData = currentLang === 'ar'
-      ? [
-          { q: "كيف يمكنني إرسال جهاز للإصلاح؟", a: "يمكنك إرسال الجهاز بالبريد أو التواصل معنا لترتيب استلامه." },
-          { q: "كم مدة التصليح المعتادة؟", a: "تتراوح بين يوم إلى 3 أيام حسب نوع العطل." },
-          { q: "هل تستخدمون قطع غيار أصلية؟", a: "نعم، جميع القطع أصلية أو مكافئة عالية الجودة." },
-          { q: "كيف أتابع حالة جهازي؟", a: "نرسل لك تحديثات عبر الصور والفيديو مباشرة على واتساب." }
-        ]
-      : [
-          { q: "Comment envoyer un appareil ?", a: "Par poste ou nous contacter pour le ramassage." },
-          { q: "Quel est le délai de réparation ?", a: "Entre 1 et 3 jours selon la panne." },
-          { q: "Utilisez-vous des pièces d'origine ?", a: "Oui, pièces d’origine ou équivalentes de qualité." },
-          { q: "Comment suivre la réparation ?", a: "Photos & vidéos envoyées sur WhatsApp." }
-        ];
-
-    document.querySelector('.faq h2').textContent = currentLang === 'ar' ? "الأسئلة الشائعة" : "FAQ";
-    document.querySelectorAll('.faq-item').forEach((item, i) => {
-      item.classList.remove('open');
-      item.querySelector('h3').textContent = faqData[i].q;
-      item.querySelector('.answer').textContent = faqData[i].a;
-    });
-
-    updateVisits();
-    updateTime();
-    rotateNews();
+    applyLanguage(currentLang);
   });
 
-  updateTime();
-  updateVisits();
-  rotateNews();
-  initFAQ();
+  // بدء الموقع
+  applyLanguage(currentLang);
   setInterval(updateTime, 1000);
+  updateTime();
 });
