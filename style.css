@@ -1,11 +1,10 @@
-/* إعادة الضبط الأساسي */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* الخط واللون العام */
 body {
   font-family: 'Montserrat', 'Open Sans', sans-serif;
   background: linear-gradient(135deg, #0b1a27, #122f4a);
@@ -15,18 +14,17 @@ body {
   line-height: 1.6;
 }
 
-/* الحاوية العامة */
 .container {
   width: 90%;
   max-width: 1100px;
-  margin: auto;
+  margin: 0 auto;
 }
 
-/* رأس الصفحة */
+/* Header */
 header {
   background-color: #061222;
   padding: 15px 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
   margin-bottom: 15px;
 }
 
@@ -39,7 +37,7 @@ header {
 }
 
 .logo {
-  width: 80px;
+  width: 150px;
   height: auto;
   border-radius: 10px;
   box-shadow: 0 0 8px #1e90ff;
@@ -52,7 +50,7 @@ header h1 {
   flex-grow: 1;
 }
 
-/* شريط الأخبار */
+/* News ticker */
 .news-ticker {
   background: #ff6b35;
   color: white;
@@ -60,6 +58,8 @@ header h1 {
   white-space: nowrap;
   font-weight: 700;
   padding: 10px 0;
+  margin-bottom: 25px;
+  position: relative;
   font-size: 1rem;
 }
 
@@ -78,7 +78,7 @@ header h1 {
   }
 }
 
-/* معلومات إضافية */
+/* Info bar */
 .info-bar {
   display: flex;
   justify-content: space-between;
@@ -109,7 +109,7 @@ header h1 {
   background-color: #d9533f;
 }
 
-/* أزرار الإجراءات */
+/* CTA Buttons */
 .cta-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -118,39 +118,73 @@ header h1 {
   margin-bottom: 30px;
 }
 
-.cta-buttons a {
+.cta-buttons a,
+.cta-buttons button {
   background: #1e90ff;
   color: white;
   padding: 14px 25px;
   border-radius: 8px;
   font-weight: 700;
   border: none;
+  cursor: pointer;
   text-decoration: none;
   min-width: 150px;
   text-align: center;
   transition: background-color 0.3s ease;
-  box-shadow: 0 2px 6px rgba(30,144,255,0.7);
+  box-shadow: 0 2px 6px rgba(30, 144, 255, 0.7);
 }
 
-.cta-buttons a:hover {
+.cta-buttons a:hover,
+.cta-buttons button:hover {
   background: #0c5ea8;
-  box-shadow: 0 4px 12px rgba(12,94,168,0.9);
+  box-shadow: 0 4px 12px rgba(12, 94, 168, 0.9);
 }
 
-/* زر متجر مميز */
-.btn-store {
-  background: #ffc107 !important;
-  color: #000 !important;
+/* ✅ زر المتجر (تم تعديل لتحديد أكثر وأهمية !important) */
+.cta-buttons .btn-store {
+  background: #ffc107 !important; /* أصفر */
+  color: #000 !important;          /* أسود */
+  padding: 14px 25px;
+  border-radius: 8px;
   font-weight: 800;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  min-width: 160px;
+  text-align: center;
   font-size: 1.1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s ease;
 }
 
-.btn-store:hover {
+.cta-buttons .btn-store:hover {
   background: #e0a800 !important;
 }
 
-/* شارة الخبرة */
+/* زر رجوع للقائمة الرئيسية */
+.btn-return {
+  display: inline-block;
+  background: #1e90ff;
+  color: white;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(30, 144, 255, 0.7);
+}
+
+.btn-return:hover {
+  background: #0c5ea8;
+  box-shadow: 0 4px 12px rgba(12, 94, 168, 0.9);
+}
+
+.back-to-home {
+  text-align: center;
+  margin: 40px 0;
+}
+
+/* Experience Badge */
 .experience-badge {
   background-color: #ff6b35;
   color: white;
@@ -164,7 +198,7 @@ header h1 {
   box-shadow: 0 0 15px #ff6b35;
 }
 
-/* الأسئلة المتكررة */
+/* FAQ */
 .faq {
   max-width: 800px;
   margin: 0 auto 60px auto;
@@ -185,7 +219,7 @@ header h1 {
   padding: 15px 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .faq-item:hover {
@@ -224,15 +258,9 @@ header h1 {
 
 .faq-item.open .answer {
   display: block;
-  animation: fadeIn 0.5s ease-in-out;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* الفوتر */
+/* Footer */
 footer {
   background-color: #061222;
   color: #888;
@@ -240,7 +268,7 @@ footer {
   text-align: center;
   font-weight: 500;
   font-size: 0.9rem;
-  box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
+  box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.05);
 }
 
 .footer-inner p {
@@ -265,10 +293,10 @@ footer {
 .social-icons img {
   width: 28px;
   height: 28px;
-  filter: drop-shadow(0 0 1px rgba(0,0,0,0.8));
+  filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.8));
 }
 
-/* استجابة على الأجهزة الصغيرة */
+/* Responsive */
 @media (max-width: 768px) {
   .header-inner {
     flex-direction: column;
