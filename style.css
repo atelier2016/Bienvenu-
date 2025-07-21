@@ -110,6 +110,23 @@ header h1 {
 }
 
 /* CTA Buttons */
+#radio-btn {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.5);
+  margin: 10px auto;
+  display: block;
+  transition: all 0.3s ease-in-out;
+}
+
+#radio-btn:hover {
+  background-color: #1976D2;
+}
 .cta-buttons {
   display: flex;
   flex-wrap: wrap;
