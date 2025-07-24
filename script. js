@@ -71,9 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // تحديث ظهور الإكولايزر حسب حالة الراديو
+  const equalizer = document.getElementById('equalizer');
+  function updateEqualizerVisibility() {
+    if (radio.paused) {
+      equalizer.style.opacity = '0.2';
+      equalizer.style.pointerEvents = 'none';
+    } else {
+      equalizer.style.opacity = '1';
+      equalizer.style.pointerEvents = 'auto';
+    }
+  }
+
   // تبديل اللغة مع تحديث النصوص
   function toggleLanguage() {
-    const radio = document.getElementById('radio-stream');
     if(currentLang === 'ar'){
       document.documentElement.lang = 'fr';
       document.documentElement.dir = 'ltr';
@@ -86,8 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.btn-maps').textContent = 'Voir sur Google Maps';
       document.querySelector('.btn-gallery').textContent = 'Voir les photos';
       document.querySelector('.btn-video').textContent = 'Voir les vidéos';
-document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خدمات الورشة' : 'Services de l\'atelier';
-      document.getElementById('radio-btn').textContent = radio.paused ? 'Écouter la radio' : 'Arrêter la radio';
+      document.querySelector('.btn-services').textContent = 'Services de l\'atelier';
+      radioBtn.textContent = radio.paused ? 'Écouter la radio' : 'Arrêter la radio';
 
       // FAQ - محتوى فرنسي
       const faqContainer = document.querySelector('.faq');
@@ -110,7 +121,8 @@ document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خ
       document.querySelector('.btn-maps').textContent = 'موقعنا على Google Maps';
       document.querySelector('.btn-gallery').textContent = 'شاهد الصور';
       document.querySelector('.btn-video').textContent = 'شاهد الفيديو';
-      document.getElementById('radio-btn').textContent = radio.paused ? 'شغّل الراديو' : 'أوقف الراديو';
+      document.querySelector('.btn-services').textContent = 'خدمات الورشة';
+      radioBtn.textContent = radio.paused ? 'شغّل الراديو' : 'أوقف الراديو';
 
       // FAQ - محتوى عربي
       const faqContainer = document.querySelector('.faq');
@@ -131,6 +143,7 @@ document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خ
   // تشغيل وإيقاف الراديو
   const radio = document.getElementById('radio-stream');
   const radioBtn = document.getElementById('radio-btn');
+
   radioBtn.addEventListener('click', () => {
     if(radio.paused){
       radio.play();
@@ -139,7 +152,12 @@ document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خ
       radio.pause();
       radioBtn.textContent = currentLang === 'ar' ? 'شغّل الراديو' : 'Écouter la radio';
     }
+    updateEqualizerVisibility();
   });
+
+  // حدثي ال Equalizer عند التشغيل أو الإيقاف
+  radio.addEventListener('play', updateEqualizerVisibility);
+  radio.addEventListener('pause', updateEqualizerVisibility);
 
   // زر تبديل اللغة
   document.getElementById('toggle-lang-btn').addEventListener('click', toggleLanguage);
@@ -152,7 +170,9 @@ document.querySelector('.btn-services').textContent = currentLang === 'ar' ? 'خ
   updateVisits();
   updateNews();
   initFAQ();
+  updateEqualizerVisibility();
 });
+
 function openModal(src) {
   const modal = document.getElementById('video-modal');
   const modalVideo = document.getElementById('modal-video');
