@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // تحديد اللغة الحالية حسب الـ lang في الـ html
   let currentLang = document.documentElement.lang.startsWith('ar') ? 'ar' : 'fr';
 
-  // تحديث الوقت والتاريخ
+  // تحديث الوقت والتاريخ حسب اللغة
   function updateTime() {
     const now = new Date();
+
     const daysAr = ['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
     const monthsAr = ['جانفي','فيفري','مارس','أفريل','ماي','جوان','جويلية','أوت','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+
     const daysFr = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
     const monthsFr = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
 
@@ -31,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('current-time').textContent = `${dateStr} - ${timeStr}`;
   }
 
-  // تحديث عداد الزيارات (localStorage)
+  // تحديث عداد الزيارات باستخدام localStorage
   function updateVisits() {
     const key = 'aem-visit-count';
     let count = parseInt(localStorage.getItem(key)) || 0;
@@ -41,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       currentLang === 'ar' ? `عدد زياراتك: ${count}` : `Nombre de visites: ${count}`;
   }
 
-  // تحديث شريط الأخبار (ثابت للنصوص)
+  // تحديث نص شريط الأخبار حسب اللغة
   function updateNews() {
     const newsAr = [
       "📢 ورشة إلكترونيك الرحماني تفتح أبوابها لجميع الولايات.",
@@ -61,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ticker.textContent = news.join(' • ');
   }
 
-  // تفعيل فتح وإغلاق الأسئلة FAQ
+  // تفعيل فتح وغلق الأسئلة في FAQ
   function initFAQ() {
     const items = document.querySelectorAll('.faq-item');
     items.forEach(item => {
@@ -71,10 +74,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // تحديث ظهور الإكولايزر حسب حالة الراديو
+  // تحديث ظهور الـ equalizer حسب حالة الراديو
+  const radio = document.getElementById('radio-stream');
   const equalizer = document.getElementById('equalizer');
   function updateEqualizerVisibility() {
-    if (radio.paused) {
+    if(radio.paused){
       equalizer.style.opacity = '0.2';
       equalizer.style.pointerEvents = 'none';
     } else {
@@ -83,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // تبديل اللغة مع تحديث النصوص
+  // تبديل اللغة مع تحديث كل النصوص والعناصر
   function toggleLanguage() {
     if(currentLang === 'ar'){
       document.documentElement.lang = 'fr';
@@ -100,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.btn-services').textContent = 'Services de l\'atelier';
       radioBtn.textContent = radio.paused ? 'Écouter la radio' : 'Arrêter la radio';
 
-      // FAQ - محتوى فرنسي
+      // FAQ محتوى فرنسي
       const faqContainer = document.querySelector('.faq');
       faqContainer.innerHTML = `
         <h2>FAQ</h2>
@@ -124,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('.btn-services').textContent = 'خدمات الورشة';
       radioBtn.textContent = radio.paused ? 'شغّل الراديو' : 'أوقف الراديو';
 
-      // FAQ - محتوى عربي
+      // FAQ محتوى عربي
       const faqContainer = document.querySelector('.faq');
       faqContainer.innerHTML = `
         <h2>الأسئلة الشائعة</h2>
@@ -141,9 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // تشغيل وإيقاف الراديو
-  const radio = document.getElementById('radio-stream');
   const radioBtn = document.getElementById('radio-btn');
-
   radioBtn.addEventListener('click', () => {
     if(radio.paused){
       radio.play();
@@ -155,7 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateEqualizerVisibility();
   });
 
-  // حدثي ال Equalizer عند التشغيل أو الإيقاف
+  // تحديث الـ equalizer عند تشغيل أو إيقاف الراديو
   radio.addEventListener('play', updateEqualizerVisibility);
   radio.addEventListener('pause', updateEqualizerVisibility);
 
@@ -173,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateEqualizerVisibility();
 });
 
+// فتح الفيديو في مودال
 function openModal(src) {
   const modal = document.getElementById('video-modal');
   const modalVideo = document.getElementById('modal-video');
@@ -190,6 +193,7 @@ function openModal(src) {
   });
 }
 
+// إغلاق المودال
 function closeModal() {
   const modal = document.getElementById('video-modal');
   const modalVideo = document.getElementById('modal-video');
